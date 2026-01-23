@@ -1,0 +1,4214 @@
+{
+  "level_number": 6,
+  "info": {
+    "kid_start_screen": 24,
+    "kid_start_block": 12,
+    "kid_start_face": 0,
+    "sword_start_screen": 0,
+    "sword_start_block": 0,
+    "guards": [
+      {
+        "block": 30,
+        "face": 0,
+        "x": 255,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 12,
+        "face": 0,
+        "x": 0,
+        "sequence": 255,
+        "prog": 5,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 0,
+        "sequence": 255,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 3,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 0,
+        "x": 0,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      },
+      {
+        "block": 30,
+        "face": 255,
+        "x": 255,
+        "sequence": 65280,
+        "prog": 1,
+        "active": true
+      }
+    ]
+  },
+  "rooms": [
+    {
+      "room_number": 0,
+      "connections": {
+        "left": null,
+        "right": 1,
+        "up": null,
+        "down": 8
+      },
+      "tiles": [
+        [
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 2
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "DROP_BUTTON",
+            "type_id": 6,
+            "modifier": 11
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 2
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 10
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 1,
+      "connections": {
+        "left": 0,
+        "right": 2,
+        "up": null,
+        "down": 9
+      },
+      "tiles": [
+        [
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_TOP",
+            "type_id": 28,
+            "modifier": 0
+          },
+          {
+            "type": "SMALL_PILLAR",
+            "type_id": 29,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_TOP",
+            "type_id": 28,
+            "modifier": 0
+          },
+          {
+            "type": "SMALL_PILLAR",
+            "type_id": 29,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 1
+          }
+        ],
+        [
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 9
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 2,
+      "connections": {
+        "left": 1,
+        "right": 3,
+        "up": null,
+        "down": 10
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 3,
+      "connections": {
+        "left": 2,
+        "right": 4,
+        "up": null,
+        "down": 11
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 7
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 4,
+      "connections": {
+        "left": 3,
+        "right": 5,
+        "up": null,
+        "down": 12
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "TAPESTRY",
+            "type_id": 7,
+            "modifier": 1
+          }
+        ],
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 255
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 5,
+      "connections": {
+        "left": 4,
+        "right": 6,
+        "up": null,
+        "down": 13
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "GATE_TOP",
+            "type_id": 11,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 6,
+      "connections": {
+        "left": 5,
+        "right": 7,
+        "up": null,
+        "down": 14
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 7,
+      "connections": {
+        "left": 6,
+        "right": null,
+        "up": null,
+        "down": 15
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 8,
+      "connections": {
+        "left": null,
+        "right": 9,
+        "up": 0,
+        "down": 16
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 9,
+      "connections": {
+        "left": 8,
+        "right": 10,
+        "up": 1,
+        "down": 17
+      },
+      "tiles": [
+        [
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 255
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 10,
+      "connections": {
+        "left": 9,
+        "right": 11,
+        "up": 2,
+        "down": 18
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 2
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 6
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 11,
+      "connections": {
+        "left": 10,
+        "right": 12,
+        "up": 3,
+        "down": 19
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "RAISE_BUTTON",
+            "type_id": 14,
+            "modifier": 0
+          },
+          {
+            "type": "RAISE_BUTTON",
+            "type_id": 14,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "RAISE_BUTTON",
+            "type_id": 14,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 12,
+      "connections": {
+        "left": 11,
+        "right": 13,
+        "up": 4,
+        "down": 20
+      },
+      "tiles": [
+        [
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 5
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "GATE_TOP",
+            "type_id": 11,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 2
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 2
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 1
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "DROP_BUTTON",
+            "type_id": 6,
+            "modifier": 4
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 1
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 2
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 13,
+      "connections": {
+        "left": 12,
+        "right": 14,
+        "up": 5,
+        "down": 21
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "GATE_TOP",
+            "type_id": 11,
+            "modifier": 0
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "LOOSE_FLOOR",
+            "type_id": 10,
+            "modifier": 1
+          },
+          {
+            "type": "LOOSE_FLOOR",
+            "type_id": 10,
+            "modifier": 1
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 14,
+      "connections": {
+        "left": 13,
+        "right": 15,
+        "up": 6,
+        "down": 22
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_TOP",
+            "type_id": 28,
+            "modifier": 0
+          },
+          {
+            "type": "SMALL_PILLAR",
+            "type_id": 29,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 255
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 2
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 15,
+      "connections": {
+        "left": 14,
+        "right": null,
+        "up": 7,
+        "down": 23
+      },
+      "tiles": [
+        [
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_TOP",
+            "type_id": 28,
+            "modifier": 0
+          },
+          {
+            "type": "SMALL_PILLAR",
+            "type_id": 29,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          },
+          {
+            "type": "BIG_PILLAR_BOTTOM",
+            "type_id": 27,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_RIGHT",
+            "type_id": 26,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 255
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "LATTICE_LEFT",
+            "type_id": 25,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 16,
+      "connections": {
+        "left": null,
+        "right": 17,
+        "up": 8,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 2
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "TORCH",
+            "type_id": 18,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 17,
+      "connections": {
+        "left": 16,
+        "right": 18,
+        "up": 9,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "BALCONY_RIGHT",
+            "type_id": 23,
+            "modifier": 0
+          },
+          {
+            "type": "LATTICE_PILLAR",
+            "type_id": 24,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 18,
+      "connections": {
+        "left": 17,
+        "right": 19,
+        "up": 10,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ],
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ],
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 19,
+      "connections": {
+        "left": 18,
+        "right": 20,
+        "up": 11,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "TORCH",
+            "type_id": 18,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 2
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "TORCH",
+            "type_id": 18,
+            "modifier": 0
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 20,
+      "connections": {
+        "left": 19,
+        "right": 21,
+        "up": 12,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "RAISE_BUTTON",
+            "type_id": 14,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 21,
+      "connections": {
+        "left": 20,
+        "right": 22,
+        "up": 13,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 3
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "MIRROR",
+            "type_id": 12,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 2
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_RIGHT",
+            "type_id": 16,
+            "modifier": 0
+          },
+          {
+            "type": "CHOMPER",
+            "type_id": 17,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 1
+          },
+          {
+            "type": "GATE",
+            "type_id": 4,
+            "modifier": 2
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 22,
+      "connections": {
+        "left": 21,
+        "right": 23,
+        "up": 14,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 255
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 1
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SPIKE",
+            "type_id": 2,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    },
+    {
+      "room_number": 23,
+      "connections": {
+        "left": 22,
+        "right": null,
+        "up": 15,
+        "down": null
+      },
+      "tiles": [
+        [
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_RIGHT",
+            "type_id": 16,
+            "modifier": 0
+          },
+          {
+            "type": "CHOMPER",
+            "type_id": 17,
+            "modifier": 0
+          },
+          {
+            "type": "WALL",
+            "type_id": 19,
+            "modifier": 0
+          },
+          {
+            "type": "EXIT_LEFT",
+            "type_id": 15,
+            "modifier": 0
+          },
+          {
+            "type": "PILLAR",
+            "type_id": 3,
+            "modifier": 0
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 1
+          },
+          {
+            "type": "EMPTY",
+            "type_id": 0,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ],
+        [
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "FLOOR",
+            "type_id": 1,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          },
+          {
+            "type": "SKELETON",
+            "type_id": 20,
+            "modifier": 0
+          }
+        ]
+      ]
+    }
+  ]
+}
