@@ -53,18 +53,21 @@ class LevelLoader:
     - INFO: 256 bytes (level metadata, start positions, guards)
     """
     
-    def __init__(self, levels_directory: str = "source_reference/01 POP Source/Levels"):
+    def __init__(self, levels_directory: str = "source_reference/01 POP Source/Levels", 
+                 json_directory: str = "assets/levels"):
         """
         Initialize the level loader.
         
         Args:
-            levels_directory: Path to directory containing level files
+            levels_directory: Path to directory containing binary level files
+            json_directory: Path to directory containing JSON level files
         """
         self.levels_dir = Path(levels_directory)
+        self.json_dir = Path(json_directory)
         
     def load_level(self, level_number: int) -> Optional[Level]:
         """
-        Load a level from file.
+        Load a level from file (tries JSON first, then binary).
         
         Args:
             level_number: Level number (0-14, where 0 is demo level)
@@ -72,6 +75,12 @@ class LevelLoader:
         Returns:
             Loaded Level object or None if file not found
         """
+        # Try JSON first
+        json_file = self.json_dir / f"level_{level_number:02d}.json"
+        if json_file.exists():
+            return self._load_from_json(json_file)
+        
+        # Fall back to binary format
         level_file = self.levels_dir / f"LEVEL{level_number}"
         
         if not level_file.exists():
@@ -88,6 +97,83 @@ class LevelLoader:
         
         # Parse the level data
         return self._parse_level(level_number, data)
+    
+    def _load_from_json(self, json_file: Path) -> Optional[Level]:
+        """
+        Load a level from JSON format.
+        
+        Args:
+            json_file: Path to JSON file
+        
+        Returns:
+            Loaded Level object or None on error
+        """
+        import json
+        
+        try:
+            with open(json_file, 'r') as f:
+                data = json.load(f)
+            
+            # Parse level info
+            info_data = data['info']
+            guards = []
+            for g in info_data.get('guards', []):
+                guard = GuardInfo(
+                    block=g['block'],
+                    face=g['face'],
+                    x=g['x'],
+                    seq_low=g.get('sequence', 0) & 0xFF,
+                    seq_high=(g.get('sequence', 0) >> 8) & 0xFF,
+                    prog=g['prog']
+                )
+                guards.append(guard)
+            
+            info = LevelInfo(
+                kid_start_screen=info_data['kid_start_screen'],
+                kid_start_block=info_data['kid_start_block'],
+                kid_start_face=info_data['kid_start_face'],
+                sword_start_screen=info_data['sword_start_screen'],
+                sword_start_block=info_data['sword_start_block'],
+                guards=guards
+            )
+            
+            # Parse rooms
+            rooms = []
+            for room_data in data['rooms']:
+                tiles = []
+                for row_data in room_data['tiles']:
+                    row = []
+                    for tile_data in row_data:
+                        tile_type = TileType[tile_data['type']]
+                        tile = Tile(
+                            tile_type=tile_type,
+                            modifier=tile_data['modifier']
+                        )
+                        row.append(tile)
+                    tiles.append(row)
+                
+                conn = room_data['connections']
+                room = Room(
+                    room_number=room_data['room_number'],
+                    tiles=tiles,
+                    left=conn['left'],
+                    right=conn['right'],
+                    up=conn['up'],
+                    down=conn['down']
+                )
+                rooms.append(room)
+            
+            return Level(
+                level_number=data['level_number'],
+                rooms=rooms,
+                info=info,
+                link_locations=[],
+                link_map=[]
+            )
+            
+        except Exception as e:
+            print(f"Error loading JSON level: {e}")
+            return None
     
     def _parse_level(self, level_number: int, data: bytes) -> Level:
         """

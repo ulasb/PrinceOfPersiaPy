@@ -4,47 +4,49 @@
 
 ### Asset Extraction & Conversion
 
-- [ ] **Study Apple II Graphics Format**
-  - [ ] Research Apple II Double Hi-Res format (560x192, 16 colors)
-  - [ ] Understand pixel encoding in source files
-  - [ ] Find or create decoder for Apple II image format
-  - [ ] Test decoder on one sprite
+- [x] **Study Apple II Graphics Format** ✅
+  - [x] Research Apple II Double Hi-Res format (560x192, 16 colors)
+  - [x] Understand pixel encoding in source files
+  - [x] Find or create decoder for Apple II image format
+  - [x] Test decoder on one sprite
 
-- [ ] **Extract Character Sprites**
-  - [ ] Locate sprite data in `source_reference/01 POP Source/Images/`
-  - [ ] Extract Prince character frames
-  - [ ] Extract Guard character frames
-  - [ ] Convert to PNG format
-  - [ ] Create sprite sheets or individual frames
-  - [ ] Save to `assets/graphics/characters/`
+- [x] **Extract Character Sprites** ✅
+  - [x] Locate sprite data in `source_reference/01 POP Source/Images/`
+  - [x] Extract Prince character frames
+  - [x] Extract Guard character frames
+  - [x] Convert to PNG format
+  - [x] Create sprite sheets or individual frames
+  - [x] Save to `assets/graphics/dump/` (602 sprites extracted)
 
-- [ ] **Extract Environment Graphics**
+- [ ] **Extract Environment Graphics** 🔄
   - [ ] Extract floor tiles
   - [ ] Extract walls and pillars
   - [ ] Extract gates and doors
   - [ ] Extract traps (spikes, chompers)
-  - [ ] Extract potions
+  [ ] Extract potions
   - [ ] Save to `assets/graphics/tiles/`
 
-- [ ] **Parse Level Data**
-  - [ ] Study blueprint format in `source_reference/01 POP Source/Levels/`
-  - [ ] Understand BLUETYPE and BLUESPEC arrays
-  - [ ] Understand LINKLOC and LINKMAP for room connections
-  - [ ] Understand INFO structure for start positions
-  - [ ] Create Python parser for binary level format
-  - [ ] Convert all 15 levels to JSON
-  - [ ] Save to `assets/levels/level_XX.json`
+- [x] **Parse Level Data** ✅
+  - [x] Study blueprint format in `source_reference/01 POP Source/Levels/`
+  - [x] Understand BLUETYPE and BLUESPEC arrays
+  - [x] Understand LINKLOC and LINKMAP for room connections
+  - [x] Understand INFO structure for start positions
+  - [x] Create Python parser for binary level format
+  - [x] Convert all 15 levels to JSON
+  - [x] Save to `assets/levels/level_XX.json`
 
 ## Core Systems (Priority 2)
 
 ### Graphics System
 
-- [ ] **Create Renderer** (`src/graphics/renderer.py`)
-  - [ ] Implement sprite loading from PNG
-  - [ ] Create sprite caching system
-  - [ ] Implement sprite rendering with opacity
-  - [ ] Add coordinate scaling/transformation
-  - [ ] Test sprite rendering
+- [x] **Create Renderer** (`src/graphics/renderer.py`) ✅
+  - [x] Implement sprite loading from PNG
+  - [x] Create sprite caching system
+  - [x] Implement sprite rendering with opacity
+  - [x] Add coordinate scaling/transformation
+  - [x] Test sprite rendering
+  - [x] Add pre-rendered tile surfaces with gradients
+  - [x] Enhance visual effects (borders, decorations)
 
 - [ ] **Display Management** (`src/graphics/display.py`)
   - [ ] Implement screen setup
@@ -53,33 +55,34 @@
   - [ ] Implement double buffering
   - [ ] Add fullscreen toggle
 
-- [ ] **Sprites** (`src/graphics/sprites.py`)
-  - [ ] Create Sprite class
-  - [ ] Implement sprite sheets
-  - [ ] Add animation frame support
-  - [ ] Create sprite groups
-  - [ ] Add collision rectangles
+- [x] **Sprites** (`src/graphics/sprites.py`) ✅
+  - [x] Create SpriteManager class
+  - [x] Implement sprite loading and caching
+  - [x] Add transparency support (colorkey)
+  - [x] Create sprite scaling functions
+  - [x] Add character sprite lookup by table/index
 
 ### Level System
 
-- [ ] **Level Loader** (`src/levels/loader.py`)
-  - [ ] JSON level file reader
-  - [ ] Blueprint data structures
-  - [ ] Room/tile mapping
-  - [ ] Object placement
-  - [ ] Guard initialization from level data
+- [x] **Level Loader** (`src/levels/loader.py`) ✅
+  - [x] JSON level file reader
+  - [x] Blueprint data structures
+  - [x] Room/tile mapping
+  - [x] Object placement
+  - [x] Guard initialization from level data
+  - [x] Binary format parser (original)
 
-- [ ] **Room Management** (`src/levels/room.py`)
-  - [ ] Room class
-  - [ ] Tile grid system
-  - [ ] Room connections (left/right/up/down)
-  - [ ] Room rendering
+- [x] **Room Management** (`src/levels/room.py`) ✅
+  - [x] Room class
+  - [x] Tile grid system
+  - [x] Room connections (left/right/up/down)
+  - [x] Room rendering
   - [ ] Collision map generation
 
-- [ ] **Tile System** (`src/levels/data.py`)
-  - [ ] Tile type definitions
-  - [ ] Tile properties (solid, trap, special)
-  - [ ] Tile rendering
+- [x] **Tile System** (`src/levels/data.py`) ✅
+  - [x] Tile type definitions
+  - [x] Tile properties (solid, trap, special)
+  - [x] Tile rendering
   - [ ] Tile collision data
 
 ### Animation System
