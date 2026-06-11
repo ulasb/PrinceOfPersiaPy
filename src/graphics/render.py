@@ -74,11 +74,13 @@ class Renderer:
         # C-section of the piece below & to the left
         tc = self._tile(level, room, col - 1, row + 1)
         if tc == L.BLOCK:
-            self.piece(BG.BLOCKC[self._spec(level, room, col - 1, row + 1)
-                                 % len(BG.BLOCKC)], col, dy)
+            sc = self._spec(level, room, col - 1, row + 1)
+            self.piece(BG.BLOCKC[sc if sc < len(BG.BLOCKC) else 0],
+                       col, dy)
         elif tc in (L.PANELWIF, L.PANELWOF):
-            self.piece(BG.PANELC[self._spec(level, room, col - 1, row + 1)
-                                 % len(BG.PANELC)], col, dy)
+            sc = self._spec(level, room, col - 1, row + 1)
+            if sc < len(BG.PANELC):
+                self.piece(BG.PANELC[sc], col, dy)
         elif tc == L.GATE:
             self._draw_gate_c(level, room, col - 1, row + 1, col, dy)
         elif tc == L.SLICER:
@@ -92,9 +94,11 @@ class Renderer:
         if t != L.BLOCK:  # hidden by a solid block
             if tb == L.BLOCK:
                 # wall side face leans into this block (PIECEBY[block]=2)
-                self.piece(BG.BLOCKB[sb % len(BG.BLOCKB)], col, ay + 2)
+                self.piece(BG.BLOCKB[sb if sb < len(BG.BLOCKB) else 0],
+                           col, ay + 2)
             elif tb in (L.PANELWIF, L.PANELWOF):
-                self.piece(BG.PANELB[sb % len(BG.PANELB)], col, ay + 3)
+                if sb < len(BG.PANELB):
+                    self.piece(BG.PANELB[sb], col, ay + 3)
             elif tb == L.SPIKES:
                 st = level.spike_state(room, col - 1, row)
                 self.piece(BG.SPIKEB[st], col, ay)
@@ -104,15 +108,26 @@ class Renderer:
                 self.piece(BG.LOOSE_B, col, ay + BG.LOOSEBY[wig] - 1)
             elif tb == L.GATE:
                 self._draw_gate_b(level, room, col - 1, row, col, ay)
+            elif tb == L.FLOOR:
+                # floors carry back-wall panel variants in their spec
+                idx = sb if sb < len(BG.FLOORB) else 0
+                self.piece(BG.FLOORB[idx], col, ay)
+            elif tb == L.SPACE:
+                if 0 < sb < len(BG.SPACEB):
+                    self.piece(BG.SPACEB[sb], col, ay + BG.SPACEBY[sb])
             else:
                 self.piece(BG.PIECEB[tb], col, ay + BG.PIECEBY[tb])
+                # palace levels add a wall stripe above many pieces
+                if self.assets.palace and BG.BSTRIPE[tb]:
+                    self.piece(BG.BSTRIPE[tb], col, ay - 32)
 
         # A-section of this piece
         if t == L.BLOCK:
             # solid walls: the bright brick face fills the whole tile
             # (blockfr; the original queues it as a front piece)
-            self.piece(BG.BLOCKFR[self._spec(level, room, col, row)
-                                  % len(BG.BLOCKFR)], col, ay)
+            sf = self._spec(level, room, col, row)
+            self.piece(BG.BLOCKFR[sf if sf < len(BG.BLOCKFR) else 0],
+                       col, ay)
         elif t == L.SPIKES:
             st = level.spike_state(room, col, row)
             self.piece(BG.SPIKEA[st], col, ay)
@@ -141,8 +156,9 @@ class Renderer:
 
         # D-section of this piece
         if t == L.BLOCK:
-            self.piece(BG.BLOCKD[self._spec(level, room, col, row)
-                                 % len(BG.BLOCKD)], col, dy)
+            sd = self._spec(level, room, col, row)
+            self.piece(BG.BLOCKD[sd if sd < len(BG.BLOCKD) else 0],
+                       col, dy)
         elif t == L.LOOSE:
             ls = level.loose_state(room, col, row)
             wig = ls % len(BG.LOOSED) if ls else 0
