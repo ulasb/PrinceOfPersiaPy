@@ -32,8 +32,10 @@ class Renderer:
         self.assets = assets
         self.canvas = pygame.Surface((C.CANVAS_W, C.CANVAS_H))
         pygame.font.init()
-        self.font = pygame.font.Font(None, 10)
-        self.big_font = pygame.font.Font(None, 16)
+        # text is rendered crisp at window resolution by the display layer
+        self.hud_text = ""
+        self.overlay_title = ""
+        self.overlay_lines: list = []
 
     # ---------------------------------------------------------- low level
     def blit_ll(self, image: Optional[pygame.Surface],
@@ -45,8 +47,9 @@ class Renderer:
 
     def piece(self, image_id: int, col: int, bottom: int,
               byte_dx: int = 0) -> None:
-        img = self.assets.bg_image(image_id)
-        self.blit_ll(img, col * 28 + byte_dx * 7, bottom)
+        x = col * 28 + byte_dx * 7
+        img = self.assets.bg_image(image_id, parity=x & 1)
+        self.blit_ll(img, x, bottom)
 
     # --------------------------------------------------------- background
     def draw_room(self, level: L.LevelState, room: int) -> None:
@@ -227,18 +230,41 @@ class Renderer:
             return
         info = char.frame_info()
         mirrored = char.face > 0
-        img = self.assets.char_image(info.table, info.image, mirrored)
-        if img is None:
-            return
         fx = int(2 * char.x) + info.dx * char.face
         bottom = char.y + info.dy
         if mirrored:
+            x = fx - 7  # placeholder, corrected below with image width
+            img = self.assets.char_image(info.table, info.image, True,
+                                         parity=0)
+            if img is None:
+                return
             x = fx - (img.get_width() - 7)
+            img = self.assets.char_image(info.table, info.image, True,
+                                         parity=x & 1)
         else:
             x = fx
+            img = self.assets.char_image(info.table, info.image, False,
+                                         parity=x & 1)
+        if img is None:
+            return
         self.blit_ll(img, x, bottom)
-        if info.sword:
+        if info.sword and self._sword_visible(char):
             self._draw_sword(char, info, fx, bottom)
+
+    @staticmethod
+    def _sword_visible(char) -> bool:
+        """The sword overlay only shows when the sword is out: the kid in
+        en-garde / sheathing / pickup moves, guards while fighting."""
+        if not char.has_sword:
+            return False
+        if getattr(char, "npc", False):
+            return False
+        drawn = getattr(char, "sword_drawn", None)
+        if drawn is None:  # guards: sword out once engaged and alive
+            return char.alive and getattr(char, "engaged", True)
+        return drawn or char.in_seq(
+            "pickupsword", "resheathe", "fastsheathe", "turndraw",
+            "engarde", "stabbed", "dropdead")
 
     def _draw_sword(self, char, info, fx: int, bottom: int) -> None:
         from data.framedefs import SWORDTAB
@@ -247,12 +273,13 @@ class Renderer:
             return
         image, sdx, sdy = entry
         mirrored = char.face > 0
-        img = self.assets.char_image(2, image, mirrored)
+        sx = fx + sdx * char.face
+        img = self.assets.char_image(2, image, mirrored, parity=0)
         if img is None:
             return
-        sx = fx + sdx * char.face
         if mirrored:
             sx -= img.get_width() - 7
+        img = self.assets.char_image(2, image, mirrored, parity=sx & 1)
         self.blit_ll(img, sx, char.y + sdy)
 
     # --------------------------------------------------------------- HUD
@@ -272,10 +299,9 @@ class Renderer:
                 pygame.draw.polygon(self.canvas, ENEMY_HP_COLOR, [
                     (x, C.HUD_Y + 2), (x + 5, C.HUD_Y + 2),
                     (x + 2, C.HUD_Y + 6)])
-        if message:
-            text = self.font.render(message, False, TEXT_COLOR)
-            self.canvas.blit(
-                text, (C.CANVAS_W // 2 - text.get_width() // 2, C.HUD_Y + 1))
+        self.hud_text = message
+        self.overlay_title = ""
+        self.overlay_lines = []
 
     # ------------------------------------------------------ falling mobs
     def draw_falling(self, level: L.LevelState, room: int) -> None:
@@ -290,14 +316,29 @@ class Renderer:
     # ------------------------------------------------------------- text
     def center_text(self, lines, color=TEXT_COLOR, title=None) -> None:
         self.canvas.fill(BLACK)
-        y = 60
-        if title:
-            surf = self.big_font.render(title, False, (255, 220, 120))
-            self.canvas.blit(
-                surf, (C.CANVAS_W // 2 - surf.get_width() // 2, y))
-            y += 26
-        for line in lines:
-            surf = self.font.render(line, False, color)
-            self.canvas.blit(
-                surf, (C.CANVAS_W // 2 - surf.get_width() // 2, y))
-            y += 12
+        self.overlay_title = title or ""
+        self.overlay_lines = list(lines)
+        self.hud_text = ""
+
+    def draw_text_overlay(self, surface: pygame.Surface) -> None:
+        """Render queued text crisp at the display surface's resolution."""
+        w, h = surface.get_size()
+        scale = max(1, w // C.CANVAS_W)
+        if self.overlay_title or self.overlay_lines:
+            big = pygame.font.Font(None, 16 * scale)
+            small = pygame.font.Font(None, 7 * scale)
+            y = h // 4
+            if self.overlay_title:
+                surf = big.render(self.overlay_title, True, (255, 220, 120))
+                surface.blit(surf, (w // 2 - surf.get_width() // 2, y))
+                y += big.get_height() + 6 * scale
+            for line in self.overlay_lines:
+                surf = small.render(line, True, TEXT_COLOR)
+                surface.blit(surf, (w // 2 - surf.get_width() // 2, y))
+                y += small.get_height() + 2 * scale
+        if self.hud_text:
+            font = pygame.font.Font(None, 7 * scale)
+            surf = font.render(self.hud_text, True, TEXT_COLOR)
+            y = C.HUD_Y * h // C.CANVAS_H
+            surface.blit(surf, (w // 2 - surf.get_width() // 2,
+                                y + (h - y - surf.get_height()) // 2))

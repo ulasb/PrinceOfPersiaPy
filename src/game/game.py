@@ -283,15 +283,19 @@ class Game:
                 return
             if char.in_seq("standjump") and 18 <= char.frame <= 25:
                 return
-            # fall only when both the body column and the trailing foot
-            # have no floor: the kid visibly runs a little past an edge
-            # before dropping, like the original
+            # fall when both the body column and the trailing foot have no
+            # floor; standing with the body over a gap is allowed only for
+            # a few pixels of toe overhang past the edge
             body_col = int(char.x) // C.TILE_W
             foot_col = int(char.x - char.face * (info.foot_dx // 2)) \
                 // C.TILE_W
-            if char.room \
-                    and not level.is_floor(char.room, body_col, char.row) \
-                    and not level.is_floor(char.room, foot_col, char.row):
+            supported = level.is_floor(char.room, body_col, char.row)
+            if not supported and foot_col != body_col \
+                    and level.is_floor(char.room, foot_col, char.row):
+                edge = body_col * C.TILE_W if char.face > 0 \
+                    else (body_col + 1) * C.TILE_W
+                supported = abs(char.x - edge) <= 5
+            if char.room and not supported:
                 char.yvel = 0
                 char.xvel = 0
                 char.start_seq("stepfall")
@@ -551,5 +555,5 @@ class Game:
             r.draw_char(self.kid)
         r.draw_foreground(self.level, room)
         minutes = max(0, self.ticks_left // (60 * C.TICKS_PER_SECOND))
-        msg = self.message or f"LEVEL {self.level_num}   {minutes} MIN"
+        msg = self.message or f"LEVEL {self.level_num}    {minutes} MIN LEFT"
         r.draw_hud(self.kid, self.opponent(), self.level_num, msg)

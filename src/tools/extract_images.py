@@ -75,7 +75,17 @@ def detect_base(data: bytes) -> int:
     return max(candidates, key=lambda b: count_valid(data, b))
 
 
-def decode_image(data: bytes, offset: int) -> Image.Image | None:
+def decode_image(data: bytes, offset: int, phase: int = 0,
+                 blend: bool = False) -> Image.Image | None:
+    """Decode one image.
+
+    phase: parity of the screen x the image will be drawn at; artifact
+    colors depend on absolute screen position, so callers blit the
+    matching variant.
+    blend: approximate composite-video blur by filling 1-2px gaps inside
+    dithered areas with a darker neighbor color (used for background
+    pieces, where the artwork relies on CRT blending to look solid).
+    """
     width = data[offset]
     height = data[offset + 1]
     if not (1 <= width <= 40 and 1 <= height <= 192):
@@ -99,27 +109,53 @@ def decode_image(data: bytes, offset: int) -> Image.Image | None:
             for b in range(7):
                 bits.append((byte >> b) & 1)
                 pals.append(pal)
+        rowpix = [None] * px_w
         for x in range(px_w):
             left = bits[x - 1] if x > 0 else 0
             right = bits[x + 1] if x < px_w - 1 else 0
+            par = (x + phase) & 1
             if bits[x]:
                 if left or right:
-                    put((x, y), WHITE)
+                    rowpix[x] = WHITE
                 else:
                     # an isolated bit is a color pixel two hires px wide
-                    color = COLORS[(pals[x], x & 1)]
-                    put((x, y), color)
-                    if x + 1 < px_w:
-                        put((x + 1, y), color)
-            elif left and right:
-                # NTSC artifact: a gap inside an alternating bit pattern
-                # shows the same color as its neighbors (e.g. 1010 reads
-                # as a solid color run, not isolated dots).
-                put((x, y), COLORS[(pals[x], (x - 1) & 1)])
+                    color = COLORS[(pals[x], par)]
+                    rowpix[x] = color
+                    if x + 1 < px_w and not right:
+                        rowpix[x + 1] = color
+            elif left and right and rowpix[x] is None:
+                # a gap inside an alternating bit pattern shows the same
+                # color as its neighbors (1010 reads as a solid run)
+                rowpix[x] = COLORS[(pals[x], (x - 1 + phase) & 1)]
+        if blend:
+            _blend_row(rowpix, px_w)
+        for x in range(px_w):
+            if rowpix[x] is not None:
+                put((x, y), rowpix[x])
     return img
 
 
-def extract_table(path: Path, out_dir: Path) -> int:
+def _blend_row(rowpix, px_w: int) -> None:
+    """Fill 1-2px transparent gaps between lit pixels with a dimmed
+    neighbor color, the way a composite CRT smears dithered fills."""
+    x = 0
+    while x < px_w:
+        if rowpix[x] is not None:
+            x += 1
+            continue
+        start = x
+        while x < px_w and rowpix[x] is None:
+            x += 1
+        gap = x - start
+        if gap <= 2 and start > 0 and x < px_w:
+            left, right = rowpix[start - 1], rowpix[x]
+            src = left if left != WHITE else right
+            fill = tuple(int(c * 0.55) for c in src[:3]) + (255,)
+            for g in range(start, x):
+                rowpix[g] = fill
+
+
+def extract_table(path: Path, out_dir: Path, blend: bool) -> int:
     data = path.read_bytes()
     base = detect_base(data)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -135,10 +171,12 @@ def extract_table(path: Path, out_dir: Path) -> int:
         offset = ptr - base
         if not (0 <= offset < len(data) - 2):
             continue
-        img = decode_image(data, offset)
+        img = decode_image(data, offset, phase=0, blend=blend)
         if img is None:
             continue
         img.save(out_dir / f"{name}_{n:03d}.png")
+        odd = decode_image(data, offset, phase=1, blend=blend)
+        odd.save(out_dir / f"{name}_{n:03d}_p1.png")
         count += 1
     print(f"{path.name}: base ${base:04x}, {count} images")
     return count
@@ -152,8 +190,8 @@ def main() -> int:
             if not path.exists():
                 print(f"missing: {path}")
                 continue
-            total += extract_table(path, OUT_DIR / sub)
-    print(f"total: {total} images")
+            total += extract_table(path, OUT_DIR / sub, blend=(sub == "bgtab"))
+    print(f"total: {total} images (plus odd-phase variants)")
     return 0
 
 

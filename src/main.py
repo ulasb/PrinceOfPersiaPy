@@ -116,6 +116,7 @@ def main() -> int:
         canvas = renderer.canvas
         pygame.transform.scale(
             canvas, window.get_size(), window)
+        renderer.draw_text_overlay(window)
         if paused:
             font = pygame.font.Font(None, 24 * scale // 2)
             text = font.render("PAUSED", True, (255, 255, 255))
