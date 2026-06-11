@@ -28,7 +28,11 @@ from graphics.render import Renderer  # noqa: E402
 def save_debug_dump(game, window) -> Path:
     """F12: save the visible frame plus a JSON of the full game state
     (kid/guard positions, sequence names, room tiles, trap states) so a
-    'this looks wrong' moment can be reported precisely."""
+    'this looks wrong' moment can be reported precisely.
+
+    The frame is re-composed from the game's software canvas: reading
+    back the accelerated display surface returns garbage on some
+    platforms (e.g. Metal-backed windows on macOS)."""
     import json
     import time as _time
 
@@ -36,7 +40,13 @@ def save_debug_dump(game, window) -> Path:
     out.mkdir(exist_ok=True)
     stamp = _time.strftime("%Y%m%d_%H%M%S")
     png = out / f"debug_{stamp}.png"
-    pygame.image.save(window, str(png))
+    frame = pygame.transform.scale(
+        game.renderer.canvas, window.get_size())
+    game.renderer.draw_text_overlay(frame)
+    # convert to 24-bit: in headed mode the canvas inherits an alpha
+    # channel from the display format, and blitted pixels carry zero
+    # alpha, which turns the saved PNG into a transparent mess
+    pygame.image.save(frame.convert(24), str(png))
     (out / f"debug_{stamp}.json").write_text(
         json.dumps(game.debug_info(), indent=2, default=str))
     return png
@@ -66,6 +76,8 @@ def main() -> int:
                         help="start at level N (1-14)")
     parser.add_argument("--scale", type=int, default=C.DISPLAY_SCALE)
     parser.add_argument("--mute", action="store_true")
+    parser.add_argument("--autodump", type=int, default=0,
+                        help="debug: save an F12-style dump after N frames")
     args = parser.parse_args()
 
     pygame.init()
@@ -128,6 +140,8 @@ def main() -> int:
                     game.start_level(game.level_num - 1)
 
         frame_count += 1
+        if args.autodump and frame_count == args.autodump:
+            dump_requested = True
         if frame_count % C.FRAMES_PER_TICK == 0 and not paused:
             game.tick(gather_input(pressed_edges))
             pressed_edges.clear()
