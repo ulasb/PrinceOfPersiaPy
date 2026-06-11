@@ -26,14 +26,15 @@ REPO = Path(__file__).resolve().parents[2]
 IMAGES_DIR = REPO / "source_reference" / "01 POP Source" / "Images"
 OUT_DIR = REPO / "assets" / "graphics"
 
-# Apple II hi-res artifact colors
+# Apple II hi-res artifact colors, sampled from NTSC-accurate emulator
+# footage of the original game
 WHITE = (255, 255, 255, 255)
 COLORS = {
     # (palette bit, x parity): RGBA
-    (0, 0): (255, 68, 253, 255),   # violet
-    (0, 1): (20, 245, 60, 255),    # green
-    (1, 0): (20, 207, 253, 255),   # blue
-    (1, 1): (255, 106, 60, 255),   # orange
+    (0, 0): (218, 60, 210, 255),   # violet
+    (0, 1): (70, 210, 40, 255),    # green
+    (1, 0): (35, 40, 200, 255),    # blue
+    (1, 1): (235, 95, 30, 255),    # orange
 }
 
 TABLES = {
@@ -79,8 +80,8 @@ def detect_base(data: bytes) -> int:
 # artists used palette 1 (warm) for skin/cloth accents and palette 0
 # (cool) for shaded detail. Unlike pixel parity, the palette bit is
 # stable data, so colors stay attached to body parts across frames.
-CHAR_WARM = (255, 140, 90, 255)
-CHAR_COOL = (120, 190, 255, 255)
+CHAR_WARM = (245, 105, 35, 255)   # the kid's vest reads bright orange
+CHAR_COOL = (90, 110, 230, 255)
 
 
 def decode_image(data: bytes, offset: int, phase: int = 0,

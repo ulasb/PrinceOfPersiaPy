@@ -182,10 +182,13 @@ class Game:
         if self.ticks_left <= 0:
             self.state = STATE_GAME_OVER
             return
-        minutes_left = self.ticks_left // (60 * C.TICKS_PER_SECOND)
-        if self.ticks_left % (60 * C.TICKS_PER_SECOND) == 0 \
-                and minutes_left <= 5:
-            self.show_message(f"{minutes_left} MINUTES LEFT")
+        minute = 60 * C.TICKS_PER_SECOND
+        minutes_left = self.ticks_left // minute
+        if self.ticks_left % minute == 0 and minutes_left > 0 \
+                and (minutes_left % 10 == 0 or minutes_left <= 5):
+            self.show_message(f"{minutes_left} MINUTES LEFT", ticks=42)
+        elif self.ticks_left == 30 * C.TICKS_PER_SECOND:
+            self.show_message("30 SECONDS LEFT", ticks=42)
 
         level = self.level
         kid = self.kid
@@ -562,6 +565,4 @@ class Game:
         if self.kid.room == room:
             r.draw_char(self.kid)
         r.draw_foreground(self.level, room)
-        minutes = max(0, self.ticks_left // (60 * C.TICKS_PER_SECOND))
-        msg = self.message or f"LEVEL {self.level_num}    {minutes} MIN LEFT"
-        r.draw_hud(self.kid, self.opponent(), self.level_num, msg)
+        r.draw_hud(self.kid, self.opponent(), self.level_num, self.message)
