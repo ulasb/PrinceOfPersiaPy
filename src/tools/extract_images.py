@@ -76,7 +76,8 @@ def detect_base(data: bytes) -> int:
 
 
 def decode_image(data: bytes, offset: int, phase: int = 0,
-                 blend: bool = False) -> Image.Image | None:
+                 blend: bool = False,
+                 soften: float = 0.0) -> Image.Image | None:
     """Decode one image.
 
     phase: parity of the screen x the image will be drawn at; artifact
@@ -85,6 +86,10 @@ def decode_image(data: bytes, offset: int, phase: int = 0,
     blend: approximate composite-video blur by filling 1-2px gaps inside
     dithered areas with a darker neighbor color (used for background
     pieces, where the artwork relies on CRT blending to look solid).
+    soften: 0..1 blends isolated-bit artifact colors toward white. The
+    kid's sprites are white clothing whose thin details pick up NTSC
+    fringe colors; a CRT showed these as faint tints, and softening
+    avoids saturated fringes that flicker between animation frames.
     """
     width = data[offset]
     height = data[offset + 1]
@@ -109,6 +114,12 @@ def decode_image(data: bytes, offset: int, phase: int = 0,
             for b in range(7):
                 bits.append((byte >> b) & 1)
                 pals.append(pal)
+        def tint(color):
+            if not soften:
+                return color
+            return tuple(int(c + (255 - c) * soften) for c in color[:3]) \
+                + (255,)
+
         rowpix = [None] * px_w
         for x in range(px_w):
             left = bits[x - 1] if x > 0 else 0
@@ -119,14 +130,14 @@ def decode_image(data: bytes, offset: int, phase: int = 0,
                     rowpix[x] = WHITE
                 else:
                     # an isolated bit is a color pixel two hires px wide
-                    color = COLORS[(pals[x], par)]
+                    color = tint(COLORS[(pals[x], par)])
                     rowpix[x] = color
                     if x + 1 < px_w and not right:
                         rowpix[x + 1] = color
             elif left and right and rowpix[x] is None:
                 # a gap inside an alternating bit pattern shows the same
                 # color as its neighbors (1010 reads as a solid run)
-                rowpix[x] = COLORS[(pals[x], (x - 1 + phase) & 1)]
+                rowpix[x] = tint(COLORS[(pals[x], (x - 1 + phase) & 1)])
         if blend:
             _blend_row(rowpix, px_w)
         for x in range(px_w):
@@ -155,7 +166,8 @@ def _blend_row(rowpix, px_w: int) -> None:
                 rowpix[g] = fill
 
 
-def extract_table(path: Path, out_dir: Path, blend: bool) -> int:
+def extract_table(path: Path, out_dir: Path, blend: bool,
+                  soften: float = 0.0, phases: bool = True) -> int:
     data = path.read_bytes()
     base = detect_base(data)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -171,15 +183,24 @@ def extract_table(path: Path, out_dir: Path, blend: bool) -> int:
         offset = ptr - base
         if not (0 <= offset < len(data) - 2):
             continue
-        img = decode_image(data, offset, phase=0, blend=blend)
+        img = decode_image(data, offset, phase=0, blend=blend,
+                           soften=soften)
         if img is None:
             continue
         img.save(out_dir / f"{name}_{n:03d}.png")
-        odd = decode_image(data, offset, phase=1, blend=blend)
-        odd.save(out_dir / f"{name}_{n:03d}_p1.png")
+        if phases:
+            odd = decode_image(data, offset, phase=1, blend=blend,
+                               soften=soften)
+            odd.save(out_dir / f"{name}_{n:03d}_p1.png")
         count += 1
     print(f"{path.name}: base ${base:04x}, {count} images")
     return count
+
+
+# the kid's tables are white clothing with fringe artifacts; enemy and
+# princess tables carry real colored uniforms built from dither fills
+KID_TABLES = {"IMG.CHTAB1", "IMG.CHTAB2", "IMG.CHTAB3", "IMG.CHTAB5",
+              "IMG.CHTAB7"}
 
 
 def main() -> int:
@@ -190,8 +211,16 @@ def main() -> int:
             if not path.exists():
                 print(f"missing: {path}")
                 continue
-            total += extract_table(path, OUT_DIR / sub, blend=(sub == "bgtab"))
-    print(f"total: {total} images (plus odd-phase variants)")
+            if sub == "bgtab":
+                total += extract_table(path, OUT_DIR / sub, blend=True)
+            elif name in KID_TABLES:
+                # characters draw with a fixed phase; no variants needed
+                total += extract_table(path, OUT_DIR / sub, blend=False,
+                                       soften=0.75, phases=False)
+            else:
+                total += extract_table(path, OUT_DIR / sub, blend=True,
+                                       phases=False)
+    print(f"total: {total} images")
     return 0
 
 

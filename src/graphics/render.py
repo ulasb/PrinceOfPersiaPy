@@ -91,7 +91,8 @@ class Renderer:
         sb = self._spec(level, room, col - 1, row)
         if t != L.BLOCK:  # hidden by a solid block
             if tb == L.BLOCK:
-                self.piece(BG.BLOCKB[sb % len(BG.BLOCKB)], col, ay)
+                # wall side face leans into this block (PIECEBY[block]=2)
+                self.piece(BG.BLOCKB[sb % len(BG.BLOCKB)], col, ay + 2)
             elif tb in (L.PANELWIF, L.PANELWOF):
                 self.piece(BG.PANELB[sb % len(BG.PANELB)], col, ay + 3)
             elif tb == L.SPIKES:
@@ -107,7 +108,12 @@ class Renderer:
                 self.piece(BG.PIECEB[tb], col, ay + BG.PIECEBY[tb])
 
         # A-section of this piece
-        if t == L.SPIKES:
+        if t == L.BLOCK:
+            # solid walls: the bright brick face fills the whole tile
+            # (blockfr; the original queues it as a front piece)
+            self.piece(BG.BLOCKFR[self._spec(level, room, col, row)
+                                  % len(BG.BLOCKFR)], col, ay)
+        elif t == L.SPIKES:
             st = level.spike_state(room, col, row)
             self.piece(BG.SPIKEA[st], col, ay)
         elif t == L.LOOSE:
@@ -116,10 +122,12 @@ class Renderer:
             self.piece(BG.LOOSEA[wig], col, ay + BG.LOOSEBY[wig])
         elif t == L.TORCH:
             self.piece(BG.PIECEA[t], col, ay + BG.PIECEAY[t])
+            # the torch bracket is the tile's B-section, drawn one block
+            # to the right; the flame sits on its sconce cup
             frame = BG.TORCHFLAME[
                 (pygame.time.get_ticks() // 90 + col * 3 + row * 5)
                 % len(BG.TORCHFLAME)]
-            self.piece(frame, col, ay - 43, byte_dx=1)
+            self.piece(frame, col + 1, ay - 43, byte_dx=1)
         elif t in (L.EXIT, L.EXIT2):
             self._draw_exit(level, room, col, row, ay)
         elif t == L.SLICER:
@@ -232,21 +240,13 @@ class Renderer:
         mirrored = char.face > 0
         fx = int(2 * char.x) + info.dx * char.face
         bottom = char.y + info.dy
-        if mirrored:
-            x = fx - 7  # placeholder, corrected below with image width
-            img = self.assets.char_image(info.table, info.image, True,
-                                         parity=0)
-            if img is None:
-                return
-            x = fx - (img.get_width() - 7)
-            img = self.assets.char_image(info.table, info.image, True,
-                                         parity=x & 1)
-        else:
-            x = fx
-            img = self.assets.char_image(info.table, info.image, False,
-                                         parity=x & 1)
+        # characters use a fixed color phase: per-position phase would
+        # make fringe colors flicker between animation frames
+        img = self.assets.char_image(info.table, info.image, mirrored,
+                                     parity=0)
         if img is None:
             return
+        x = fx - (img.get_width() - 7) if mirrored else fx
         self.blit_ll(img, x, bottom)
         if info.sword and self._sword_visible(char):
             self._draw_sword(char, info, fx, bottom)
@@ -279,7 +279,6 @@ class Renderer:
             return
         if mirrored:
             sx -= img.get_width() - 7
-        img = self.assets.char_image(2, image, mirrored, parity=sx & 1)
         self.blit_ll(img, sx, char.y + sdy)
 
     # --------------------------------------------------------------- HUD
