@@ -526,6 +526,60 @@ class Game:
             self.level.set_tile(*kid.pickup_tile, L.FLOOR, 0)
         kid.pickup = ""
 
+    # -------------------------------------------------------- debug dump
+    def debug_info(self) -> dict:
+        """Everything needed to diagnose 'this frame looks wrong'."""
+        from data import seqdata
+
+        def seq_label(offset: int) -> str:
+            best, best_addr = "?", -1
+            for name, addr in seqdata.LABELS.items():
+                if best_addr < addr <= offset:
+                    best, best_addr = name, addr
+            return f"{best}+{offset - best_addr}"
+
+        def char_info(c) -> dict:
+            return {
+                "room": c.room, "x": c.x, "y": c.y, "row": c.row,
+                "col": c.col, "face": c.face, "action": c.action,
+                "frame": c.frame, "seq": seq_label(c.seq), "hp": c.hp,
+                "alive": c.alive,
+            }
+
+        level = self.level
+        room = self.visible_room
+        info = {
+            "state": self.state,
+            "level": self.level_num,
+            "ticks_left": self.ticks_left,
+            "visible_room": room,
+            "kid": char_info(self.kid),
+            "kid_extra": {
+                "has_sword": self.kid.has_sword,
+                "sword_drawn": self.kid.sword_drawn,
+                "weightless": self.kid.weightless,
+            },
+            "guards": [char_info(g) | {"npc": g.npc, "skill": g.skill,
+                                       "engaged": g.engaged}
+                       for g in self.guards if g.room == room],
+        }
+        if level and room:
+            info["room_links"] = level.links.get(room)
+            info["room_tiles"] = [
+                [f"{level.types[room][r][c] & 0x1F}"
+                 f":{level.specs[room][r][c]}" for c in range(10)]
+                for r in range(3)]
+            info["active"] = {
+                "gates": {str(k): v for k, v in level.gates.items()},
+                "gate_timers": {str(k): v
+                                for k, v in level.gate_timers.items()},
+                "plates": {str(k): v for k, v in level.plates.items()},
+                "spikes": {str(k): v for k, v in level.spikes.items()},
+                "loose": {str(k): v for k, v in level.loose.items()},
+                "falling": [vars(f) for f in level.falling],
+            }
+        return info
+
     # ------------------------------------------------------------ render
     def render(self) -> None:
         r = self.renderer

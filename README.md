@@ -61,6 +61,7 @@ Options: `--level N` start level, `--scale N` window scale (default 4),
 | ↓ in combat | sheathe sword |
 | R | restart level |
 | F5 / F9 | quicksave / quickload |
+| F12 | save a debug screenshot + game-state JSON to `screenshots/` |
 | `[` / `]` | previous / next level (debug) |
 | Esc | pause |
 

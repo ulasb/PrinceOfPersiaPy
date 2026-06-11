@@ -25,6 +25,23 @@ from graphics.assets import Assets  # noqa: E402
 from graphics.render import Renderer  # noqa: E402
 
 
+def save_debug_dump(game, window) -> Path:
+    """F12: save the visible frame plus a JSON of the full game state
+    (kid/guard positions, sequence names, room tiles, trap states) so a
+    'this looks wrong' moment can be reported precisely."""
+    import json
+    import time as _time
+
+    out = Path("screenshots")
+    out.mkdir(exist_ok=True)
+    stamp = _time.strftime("%Y%m%d_%H%M%S")
+    png = out / f"debug_{stamp}.png"
+    pygame.image.save(window, str(png))
+    (out / f"debug_{stamp}.json").write_text(
+        json.dumps(game.debug_info(), indent=2, default=str))
+    return png
+
+
 def gather_input(pressed_edges: set) -> Input:
     keys = pygame.key.get_pressed()
     shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
@@ -68,6 +85,7 @@ def main() -> int:
     frame_count = 0
     pressed_edges: set = set()
     paused = False
+    dump_requested = False
     running = True
     while running:
         for event in pygame.event.get():
@@ -99,6 +117,8 @@ def main() -> int:
                     game.quicksave()
                 elif event.key == pygame.K_F9:
                     game.quickload()
+                elif event.key == pygame.K_F12:
+                    dump_requested = True
                 elif event.key == pygame.K_RIGHTBRACKET \
                         and game.state == STATE_PLAYING:
                     game.next_level()
@@ -117,6 +137,10 @@ def main() -> int:
         pygame.transform.scale(
             canvas, window.get_size(), window)
         renderer.draw_text_overlay(window)
+        if dump_requested:
+            dump_requested = False
+            path = save_debug_dump(game, window)
+            game.show_message("SAVED " + path.name, ticks=30)
         if paused:
             font = pygame.font.Font(None, 24 * scale // 2)
             text = font.render("PAUSED", True, (255, 255, 255))

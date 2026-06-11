@@ -329,8 +329,48 @@ class Renderer:
             self.blit_ll(img_d, ff.col * 28, int(ff.y) + 3)
 
     # ------------------------------------------------------------- text
+    GOLD = (224, 178, 82)
+    NIGHT = (8, 10, 36)
+    SKYLINE = (24, 26, 64)
+
+    # fixed starfield (x, y, brightness) so the night sky doesn't twinkle
+    STARS = [(11, 17, 200), (33, 9, 140), (52, 26, 255), (71, 12, 160),
+             (95, 31, 190), (118, 7, 140), (137, 22, 255), (160, 13, 150),
+             (181, 28, 200), (203, 9, 150), (224, 24, 255), (243, 15, 160),
+             (262, 30, 190), (24, 44, 150), (88, 49, 140), (152, 41, 150),
+             (208, 47, 140), (252, 52, 150), (45, 60, 130), (130, 58, 130)]
+
+    def _draw_night_scene(self) -> None:
+        """Original Arabian-nights backdrop: stars, crescent moon and a
+        domed skyline, drawn from code (the released source contains no
+        title artwork)."""
+        cv = self.canvas
+        cv.fill(self.NIGHT)
+        for x, y, b in self.STARS:
+            cv.set_at((x, y), (b, b, min(255, b + 20)))
+        # crescent moon
+        pygame.draw.circle(cv, (236, 222, 180), (238, 32), 11)
+        pygame.draw.circle(cv, self.NIGHT, (243, 28), 10)
+        # skyline: walls, domes and minarets
+        h = C.CANVAS_H
+        pygame.draw.rect(cv, self.SKYLINE, (0, h - 36, C.CANVAS_W, 36))
+        for cx, r in ((40, 16), (140, 22), (236, 14)):
+            pygame.draw.circle(cv, self.SKYLINE, (cx, h - 36), r)
+            pygame.draw.line(cv, self.SKYLINE, (cx, h - 36 - r - 5),
+                             (cx, h - 36 - r), 1)
+        for mx, mh in ((78, 62), (196, 54), (266, 44)):
+            pygame.draw.rect(cv, self.SKYLINE, (mx - 2, h - 36 - mh, 5, mh))
+            pygame.draw.circle(cv, self.SKYLINE, (mx, h - 36 - mh), 4)
+        # ornamental gold frame with corner diamonds
+        pygame.draw.rect(cv, self.GOLD, (4, 4, C.CANVAS_W - 8, h - 8), 1)
+        pygame.draw.rect(cv, self.GOLD, (7, 7, C.CANVAS_W - 14, h - 14), 1)
+        for px, py in ((4, 4), (C.CANVAS_W - 5, 4), (4, h - 5),
+                       (C.CANVAS_W - 5, h - 5)):
+            pygame.draw.polygon(cv, self.GOLD, [
+                (px, py - 4), (px + 4, py), (px, py + 4), (px - 4, py)])
+
     def center_text(self, lines, color=TEXT_COLOR, title=None) -> None:
-        self.canvas.fill(BLACK)
+        self._draw_night_scene()
         self.overlay_title = title or ""
         self.overlay_lines = list(lines)
         self.hud_text = ""
@@ -340,17 +380,40 @@ class Renderer:
         w, h = surface.get_size()
         scale = max(1, w // C.CANVAS_W)
         if self.overlay_title or self.overlay_lines:
-            big = pygame.font.Font(None, 16 * scale)
-            small = pygame.font.Font(None, 7 * scale)
-            y = h // 4
+            big = self._fancy_font(17 * scale)
+            small = self._fancy_font(7 * scale)
+            y = h // 5
             if self.overlay_title:
-                surf = big.render(self.overlay_title, True, (255, 220, 120))
-                surface.blit(surf, (w // 2 - surf.get_width() // 2, y))
-                y += big.get_height() + 6 * scale
+                # gold title with a deep shadow and ornamental rule
+                surf = big.render(self.overlay_title, True, self.GOLD)
+                shadow = big.render(self.overlay_title, True, (60, 30, 10))
+                x = w // 2 - surf.get_width() // 2
+                surface.blit(shadow, (x + scale, y + scale))
+                surface.blit(surf, (x, y))
+                y += big.get_height() + 2 * scale
+                self._ornament_rule(surface, w // 2, y, 30 * scale)
+                y += 8 * scale
             for line in self.overlay_lines:
-                surf = small.render(line, True, TEXT_COLOR)
+                surf = small.render(line, True, (235, 226, 200))
                 surface.blit(surf, (w // 2 - surf.get_width() // 2, y))
                 y += small.get_height() + 2 * scale
+
+    @staticmethod
+    def _fancy_font(size: int) -> "pygame.font.Font":
+        for name in ("palatino", "georgia", "timesnewroman"):
+            path = pygame.font.match_font(name)
+            if path:
+                return pygame.font.Font(path, size)
+        return pygame.font.Font(None, size)
+
+    def _ornament_rule(self, surface, cx, y, half) -> None:
+        scale = max(1, surface.get_width() // C.CANVAS_W)
+        pygame.draw.line(surface, self.GOLD, (cx - half, y), (cx + half, y),
+                         max(1, scale // 2))
+        for px in (cx - half, cx, cx + half):
+            pygame.draw.polygon(surface, self.GOLD, [
+                (px, y - 2 * scale), (px + 2 * scale, y),
+                (px, y + 2 * scale), (px - 2 * scale, y)])
         if self.hud_text:
             # framed banner box like the original's status messages
             font = pygame.font.Font(None, 8 * scale)
