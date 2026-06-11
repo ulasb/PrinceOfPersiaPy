@@ -57,3 +57,6 @@ source_reference/.git/
 # Original Apple II source (clone of jmechner/Prince-of-Persia-Apple-II);
 # required only to re-run the extraction tools
 source_reference/
+
+# pygame-pilot sessions
+.pilot*/

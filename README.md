@@ -110,6 +110,17 @@ pytest tests/test_game.py
 python tests/harness.py --level 1 --script "16:, 30:r" --out /tmp/shot.png
 ```
 
+For end-to-end verification of the real app (window, input, render
+loop), use [pygame-pilot](https://github.com/ulasb/pygame-pilot), which
+frame-steps the unmodified game and captures what a player would see:
+
+```bash
+python -m pygamepilot start --cwd . --python venv/bin/python -- src/main.py --mute
+python -m pygamepilot adv 6 --tap return          # leave the title screen
+python -m pygamepilot adv 60 --down right --shot running
+python -m pygamepilot stop
+```
+
 ## License & Legal
 
 The original Prince of Persia source code is copyright © Jordan Mechner;
