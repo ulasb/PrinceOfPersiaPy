@@ -75,9 +75,13 @@ def detect_base(data: bytes) -> int:
     return max(candidates, key=lambda b: count_valid(data, b))
 
 
+KID_SHADE = (150, 205, 255, 255)   # stable pale-blue shading for the kid
+
+
 def decode_image(data: bytes, offset: int, phase: int = 0,
                  blend: bool = False,
-                 soften: float = 0.0) -> Image.Image | None:
+                 soften: float = 0.0,
+                 fixed_tint=None) -> Image.Image | None:
     """Decode one image.
 
     phase: parity of the screen x the image will be drawn at; artifact
@@ -115,6 +119,10 @@ def decode_image(data: bytes, offset: int, phase: int = 0,
                 bits.append((byte >> b) & 1)
                 pals.append(pal)
         def tint(color):
+            if fixed_tint is not None:
+                # replace parity-dependent artifact colors with one stable
+                # hue so animation frames never color-cycle
+                return fixed_tint
             if not soften:
                 return color
             return tuple(int(c + (255 - c) * soften) for c in color[:3]) \
@@ -167,7 +175,8 @@ def _blend_row(rowpix, px_w: int) -> None:
 
 
 def extract_table(path: Path, out_dir: Path, blend: bool,
-                  soften: float = 0.0, phases: bool = True) -> int:
+                  soften: float = 0.0, phases: bool = True,
+                  fixed_tint=None) -> int:
     data = path.read_bytes()
     base = detect_base(data)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -184,13 +193,13 @@ def extract_table(path: Path, out_dir: Path, blend: bool,
         if not (0 <= offset < len(data) - 2):
             continue
         img = decode_image(data, offset, phase=0, blend=blend,
-                           soften=soften)
+                           soften=soften, fixed_tint=fixed_tint)
         if img is None:
             continue
         img.save(out_dir / f"{name}_{n:03d}.png")
         if phases:
             odd = decode_image(data, offset, phase=1, blend=blend,
-                               soften=soften)
+                               soften=soften, fixed_tint=fixed_tint)
             odd.save(out_dir / f"{name}_{n:03d}_p1.png")
         count += 1
     print(f"{path.name}: base ${base:04x}, {count} images")
@@ -215,10 +224,10 @@ def main() -> int:
                 total += extract_table(path, OUT_DIR / sub, blend=True)
             elif name in KID_TABLES:
                 # characters draw with a fixed phase; no variants needed.
-                # The kid is white clothing: render fringe artifacts as
-                # pure white so nothing color-cycles between frames.
+                # The kid's artifact pixels become one stable shading hue
+                # so he keeps definition without color-cycling.
                 total += extract_table(path, OUT_DIR / sub, blend=False,
-                                       soften=1.0, phases=False)
+                                       phases=False, fixed_tint=KID_SHADE)
             else:
                 total += extract_table(path, OUT_DIR / sub, blend=True,
                                        phases=False)
