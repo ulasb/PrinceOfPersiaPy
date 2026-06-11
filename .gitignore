@@ -53,3 +53,7 @@ screenshots/
 
 # Keep source reference but ignore some files
 source_reference/.git/
+
+# Original Apple II source (clone of jmechner/Prince-of-Persia-Apple-II);
+# required only to re-run the extraction tools
+source_reference/
