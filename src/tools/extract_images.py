@@ -214,9 +214,11 @@ def main() -> int:
             if sub == "bgtab":
                 total += extract_table(path, OUT_DIR / sub, blend=True)
             elif name in KID_TABLES:
-                # characters draw with a fixed phase; no variants needed
+                # characters draw with a fixed phase; no variants needed.
+                # The kid is white clothing: render fringe artifacts as
+                # pure white so nothing color-cycles between frames.
                 total += extract_table(path, OUT_DIR / sub, blend=False,
-                                       soften=0.75, phases=False)
+                                       soften=1.0, phases=False)
             else:
                 total += extract_table(path, OUT_DIR / sub, blend=True,
                                        phases=False)

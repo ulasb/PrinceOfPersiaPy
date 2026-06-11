@@ -182,14 +182,21 @@ class Kid(Char):
             return None
         return None
 
+    def _hang_x(self, ledge_col: int, face: int) -> float:
+        """Hanging x: just inside the ledge column at its open edge
+        (the original fudges CharX so the grab lands on the block edge;
+        climbup's net +6 then ends well onto the tile surface)."""
+        if face > 0:
+            return ledge_col * C.TILE_W + 2
+        return (ledge_col + 1) * C.TILE_W - 3
+
     def _try_climb(self, level) -> bool:
         col = self._ledge_above(level)
         if col is None:
             return False
-        # face the ledge and snap to its edge
+        # face the ledge and snap inside its column edge
         self.face = 1 if col > self.col else -1
-        edge = col * C.TILE_W
-        self.x = edge - 4 if self.face > 0 else edge + C.TILE_W + 3
+        self.x = self._hang_x(col, self.face)
         self.start_seq("jumphangMed")
         self.hang_ticks = 0
         return True
@@ -204,11 +211,14 @@ class Kid(Char):
             col = self.col + gap_dir
             if not level.is_floor(self.room, col, self.row) \
                     and not level.is_barrier(self.room, col, self.row):
-                # boundary between the ledge tile and the gap tile
-                edge = col * C.TILE_W if gap_dir > 0 \
-                    else (col + 1) * C.TILE_W
+                # back over the edge: start 9px from it on the ledge side
+                # (CTRL.S), the sequence's chx -5 leaves the hang 4px in
+                ledge = self.col
                 self.face = -gap_dir
-                self.x = edge + 2 * self.face
+                if gap_dir > 0:
+                    self.x = (ledge + 1) * C.TILE_W - 9
+                else:
+                    self.x = ledge * C.TILE_W + 8
                 self.start_seq("climbdown")
                 self.hang_ticks = 0
                 return True
@@ -265,10 +275,8 @@ class Kid(Char):
                 continue
             ledge_y = C.floor_y(row)
             if abs(self.y - ledge_y) <= 15 and self.yvel >= 0:
-                face = 1 if col > self.col else -1
-                edge = col * C.TILE_W
-                self.x = edge - 4 if face > 0 else edge + C.TILE_W + 3
-                self.face = face
+                self.face = 1 if col > self.col else -1
+                self.x = self._hang_x(col, self.face)
                 self.row = row
                 self.y = ledge_y
                 self.yvel = 0
@@ -282,10 +290,9 @@ class Kid(Char):
         if not self.in_seq("hang", "hang1", "hangstraight"):
             return  # climbup/climbfail/hangdrop already in progress
         self.hang_ticks += 1
-        ledge_col = self.col + self.face
+        # the hands grip the ledge tile directly above the body column
+        ledge_col = self.col
         if inp.up or self.forward_held(inp):
-            # climb up if nothing blocks the ledge
-            above = level.tile(self.room, ledge_col, self.row - 1)
             blocked = level.is_barrier(self.room, ledge_col, self.row - 1)
             if not blocked:
                 self.start_seq("climbup")
