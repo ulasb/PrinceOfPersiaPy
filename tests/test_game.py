@@ -288,5 +288,6 @@ def test_hang_holds_while_shift_held_drops_on_release():
     run(game, 10, {"r"})
     run(game, 80, {"r", "s"})   # grab the edge, keep holding
     assert kid.action == C.ACT_HANG_STRAIGHT  # still hanging after 6s
-    run(game, 8)                # release
-    assert kid.row == 1 and kid.alive  # dropped and landed below
+    assert kid.col == 4         # body dangles in the open shaft
+    run(game, 12)               # release
+    assert kid.row == 2 and kid.alive  # dropped onto the rubble below
