@@ -619,4 +619,7 @@ class Game:
         if self.kid.room == room:
             r.draw_char(self.kid)
         r.draw_foreground(self.level, room)
-        r.draw_hud(self.kid, self.opponent(), self.level_num, self.message)
+        minutes = max(0, self.ticks_left // (60 * C.TICKS_PER_SECOND))
+        status = self.message or \
+            f"LEVEL {self.level_num}      {minutes} MIN LEFT"
+        r.draw_hud(self.kid, self.opponent(), self.level_num, status)

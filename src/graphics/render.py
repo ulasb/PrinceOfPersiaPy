@@ -397,6 +397,13 @@ class Renderer:
                 surf = small.render(line, True, (235, 226, 200))
                 surface.blit(surf, (w // 2 - surf.get_width() // 2, y))
                 y += small.get_height() + 2 * scale
+        if self.hud_text:
+            # status line centered in the bottom HUD strip
+            font = pygame.font.Font(None, 7 * scale)
+            surf = font.render(self.hud_text, True, TEXT_COLOR)
+            y = C.HUD_Y * h // C.CANVAS_H
+            surface.blit(surf, (w // 2 - surf.get_width() // 2,
+                                y + (h - y - surf.get_height()) // 2))
 
     @staticmethod
     def _fancy_font(size: int) -> "pygame.font.Font":
@@ -414,17 +421,3 @@ class Renderer:
             pygame.draw.polygon(surface, self.GOLD, [
                 (px, y - 2 * scale), (px + 2 * scale, y),
                 (px, y + 2 * scale), (px - 2 * scale, y)])
-        if self.hud_text:
-            # framed banner box like the original's status messages
-            font = pygame.font.Font(None, 8 * scale)
-            surf = font.render(self.hud_text, True, TEXT_COLOR)
-            pad = 3 * scale
-            bw = surf.get_width() + pad * 2
-            bh = surf.get_height() + pad * 2
-            bx = w // 2 - bw // 2
-            by = int(h * 0.38)
-            pygame.draw.rect(surface, (0, 0, 0),
-                             (bx - 2 * scale, by - 2 * scale,
-                              bw + 4 * scale, bh + 4 * scale))
-            pygame.draw.rect(surface, TEXT_COLOR, (bx, by, bw, bh), scale)
-            surface.blit(surf, (bx + pad, by + pad))
