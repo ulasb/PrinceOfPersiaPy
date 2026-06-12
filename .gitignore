@@ -60,3 +60,6 @@ source_reference/
 
 # pygame-pilot sessions
 .pilot*/
+
+# gameplay recordings (F10)
+recordings/

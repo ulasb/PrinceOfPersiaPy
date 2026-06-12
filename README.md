@@ -62,6 +62,7 @@ Options: `--level N` start level, `--scale N` window scale (default 4),
 | R | restart level |
 | F5 / F9 | quicksave / quickload |
 | F12 | save a debug screenshot + game-state JSON to `screenshots/` |
+| F10 | toggle movie recording (frames + game state to `recordings/`) |
 | `[` / `]` | previous / next level (debug) |
 | Esc | pause |
 
@@ -120,6 +121,16 @@ python -m pygamepilot start --cwd . --python venv/bin/python -- src/main.py --mu
 python -m pygamepilot adv 6 --tap return          # leave the title screen
 python -m pygamepilot adv 60 --down right --shot running
 python -m pygamepilot stop
+```
+
+While playing, F10 records a movie: one PNG per game tick plus a
+`state.jsonl` with the full simulation state of every frame, saved
+under `recordings/rec_<timestamp>/`. Press F10 again to stop (a
+blinking REC indicator shows while recording). Turn a recording into
+a shareable GIF with:
+
+```bash
+python src/tools/make_gif.py recordings/rec_<timestamp>
 ```
 
 ## License & Legal

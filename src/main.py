@@ -25,6 +25,66 @@ from graphics.assets import Assets  # noqa: E402
 from graphics.render import Renderer  # noqa: E402
 
 
+class Recorder:
+    """F10 movie recording: one frame per game tick (12/s) saved as
+    native-resolution PNGs plus a JSONL stream of the full game state,
+    so a recording can be replayed and analyzed frame by frame."""
+
+    def __init__(self):
+        self.dir: Path | None = None
+        self.count = 0
+        self._jsonl = None
+
+    @property
+    def active(self) -> bool:
+        return self.dir is not None
+
+    def start(self, game) -> None:
+        import time as _time
+        stamp = _time.strftime("%Y%m%d_%H%M%S")
+        self.dir = Path("recordings") / f"rec_{stamp}"
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.count = 0
+        self._jsonl = open(self.dir / "state.jsonl", "w")
+        game.show_message("RECORDING STARTED", ticks=18)
+
+    def capture(self, game) -> None:
+        import json
+        # the canvas may carry a garbage alpha channel in headed mode
+        frame = game.renderer.canvas.convert(24)
+        pygame.image.save(
+            frame, str(self.dir / f"frame_{self.count:05d}.png"))
+        info = game.debug_info()
+        info["rec_frame"] = self.count
+        info["message"] = game.message
+        self._jsonl.write(json.dumps(info, default=str) + "\n")
+        self.count += 1
+
+    def stop(self, game) -> None:
+        import json
+        (self.dir / "meta.json").write_text(json.dumps({
+            "frames": self.count,
+            "ticks_per_second": C.TICKS_PER_SECOND,
+            "level": game.level_num,
+        }, indent=2))
+        self._jsonl.close()
+        game.show_message(f"SAVED {self.dir.name} ({self.count} FRAMES)",
+                          ticks=30)
+        self.dir = None
+        self._jsonl = None
+
+    def draw_indicator(self, window, frame_count: int) -> None:
+        if not self.active or (frame_count // 30) % 2:
+            return  # blink
+        scale = max(1, window.get_width() // C.CANVAS_W)
+        x = window.get_width() - 14 * scale
+        pygame.draw.circle(window, (230, 40, 40), (x, 6 * scale), 3 * scale)
+        font = pygame.font.Font(None, 7 * scale)
+        text = font.render("REC", True, (230, 40, 40))
+        window.blit(text, (x + 5 * scale,
+                           6 * scale - text.get_height() // 2))
+
+
 def save_debug_dump(game, window) -> Path:
     """F12: save the visible frame plus a JSON of the full game state
     (kid/guard positions, sequence names, room tiles, trap states) so a
@@ -98,6 +158,7 @@ def main() -> int:
     pressed_edges: set = set()
     paused = False
     dump_requested = False
+    recorder = Recorder()
     running = True
     while running:
         for event in pygame.event.get():
@@ -131,6 +192,11 @@ def main() -> int:
                     game.quickload()
                 elif event.key == pygame.K_F12:
                     dump_requested = True
+                elif event.key == pygame.K_F10:
+                    if recorder.active:
+                        recorder.stop(game)
+                    else:
+                        recorder.start(game)
                 elif event.key == pygame.K_RIGHTBRACKET \
                         and game.state == STATE_PLAYING:
                     game.next_level()
@@ -147,10 +213,13 @@ def main() -> int:
             pressed_edges.clear()
 
         game.render()
+        if recorder.active and frame_count % C.FRAMES_PER_TICK == 0:
+            recorder.capture(game)
         canvas = renderer.canvas
         pygame.transform.scale(
             canvas, window.get_size(), window)
         renderer.draw_text_overlay(window)
+        recorder.draw_indicator(window, frame_count)
         if dump_requested:
             dump_requested = False
             path = save_debug_dump(game, window)
