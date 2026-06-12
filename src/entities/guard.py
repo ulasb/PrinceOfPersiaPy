@@ -77,11 +77,11 @@ class GuardChar(Char):
             self.face = want_face
             return
         dist = abs(kid.x - self.x)
-        if dist > 24:
+        if dist > 16:
             if self._floor_ahead(level):
                 self.start_seq("advance")
             return
-        if dist < 12:
+        if dist < 9:
             if self._floor_behind(level):
                 self.start_seq("retreat")
             return

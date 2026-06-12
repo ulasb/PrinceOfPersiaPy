@@ -111,6 +111,10 @@ class Game:
                 best = g
         return best
 
+    # arm + sword reach at full extension; beyond this the tip visibly
+    # falls short of the opponent's body
+    STRIKE_RANGE = 17
+
     def _resolve_strikes(self) -> None:
         """Check strike connections at full sword extension frames."""
         opp = self.opponent()
@@ -118,7 +122,7 @@ class Game:
             return
         kid = self.kid
         dist = abs(kid.x - opp.x)
-        if dist > 26 or kid.row != opp.row:
+        if dist > self.STRIKE_RANGE or kid.row != opp.row:
             return
         # kid strikes (full extension frame 154 / 167)
         if kid.frame in (154, 167) and opp.alive:

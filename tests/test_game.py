@@ -182,7 +182,7 @@ def make_duel():
     kid.hp = kid.max_hp = 10
     teleport(kid, 3, 1, 75, 1)
     opp = game.guards[0]
-    opp.x, opp.row, opp.room = 97.0, 1, 3
+    opp.x, opp.row, opp.room = 89.0, 1, 3  # within sword reach
     return game, kid, opp
 
 
@@ -275,5 +275,18 @@ def test_shift_edge_grab_is_stable():
     for _ in range(30):  # walk off the edge holding shift
         run(game, 1, {"r", "s"}, prev={"r", "s"})
         xs.append(kid.x)
-    assert kid.action == C.ACT_HANG  # caught the ledge
+    # caught the ledge: swing hang or settled still hang
+    assert kid.action in (C.ACT_HANG, C.ACT_HANG_STRAIGHT)
     assert max(xs[-12:]) - min(xs[-12:]) == 0  # no teleporting
+
+
+def test_hang_holds_while_shift_held_drops_on_release():
+    game = make_game(1)
+    settle(game)
+    kid = game.kid
+    kid.face = 1
+    run(game, 10, {"r"})
+    run(game, 80, {"r", "s"})   # grab the edge, keep holding
+    assert kid.action == C.ACT_HANG_STRAIGHT  # still hanging after 6s
+    run(game, 8)                # release
+    assert kid.row == 1 and kid.alive  # dropped and landed below

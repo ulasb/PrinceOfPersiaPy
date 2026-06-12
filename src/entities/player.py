@@ -307,14 +307,19 @@ class Kid(Char):
             else:
                 self.start_seq("climbfail")
             return
-        if inp.down_pressed or (not inp.shift and self.hang_ticks > 2) \
-                or self.hang_ticks > 35:
+        if inp.down_pressed or (not inp.shift and self.hang_ticks > 2):
             # drop: land right below if there's floor, else free fall
             if level.is_floor(self.room, self.col, self.row):
                 self.start_seq("hangdrop")
             else:
                 self.start_seq("hangfall")
             return
+        # the swing sequence ends in hangdrop by itself (grab-and-release
+        # behavior); while shift is held, settle into the still hang so
+        # the kid holds on indefinitely like the original
+        if inp.shift and self.hang_ticks >= 6 \
+                and self.in_seq("hang", "hang1"):
+            self.start_seq("hangstraight")
 
     # --- combat ---
     def _control_combat(self, inp: Input, level, opponent) -> None:
@@ -341,7 +346,7 @@ class Kid(Char):
             return
         d = self.dir_input(inp)
         if d == self.face:
-            if abs(opponent.x - self.x) > 18:
+            if abs(opponent.x - self.x) > 15:
                 self.start_seq("advance")
             return
         if d == -self.face:
