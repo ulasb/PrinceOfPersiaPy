@@ -250,3 +250,30 @@ def test_frame_decode():
     assert stand.table == 0 and stand.image == 15
     guard_ready = decode_frame(158, C.CHAR_GUARD)
     assert guard_ready.table == 3  # CHTAB4 variant
+
+
+def test_careful_steps_stop_at_edge():
+    game = make_game(1)
+    settle(game)
+    kid = game.kid
+    kid.face = 1
+    for _ in range(30):  # keep careful-stepping into the col-4 gap
+        run(game, 12, {"r", "s"})
+        run(game, 3)
+        assert kid.row == 1 and kid.action not in (3, 4), \
+            f"fell at x={kid.x}"
+    assert kid.col == 3  # parked at the edge (x=55, gap starts at 56)
+
+
+def test_shift_edge_grab_is_stable():
+    game = make_game(1)
+    settle(game)
+    kid = game.kid
+    kid.face = 1
+    run(game, 10, {"r"})
+    xs = []
+    for _ in range(30):  # walk off the edge holding shift
+        run(game, 1, {"r", "s"}, prev={"r", "s"})
+        xs.append(kid.x)
+    assert kid.action == C.ACT_HANG  # caught the ledge
+    assert max(xs[-12:]) - min(xs[-12:]) == 0  # no teleporting

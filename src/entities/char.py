@@ -35,6 +35,13 @@ OP_TAP = 0xF2
 OP_NEXTLEVEL = 0xF1
 
 
+# sequences that position the body against walls/over voids on purpose;
+# grounded checks and midair grabs must leave them alone
+HANG_SEQS = ("jumphangMed", "jumphangLong", "hang", "hang1",
+             "hangstraight", "climbup", "climbdown", "climbfail",
+             "fallhang", "jumpbackhang", "hangdrop")
+
+
 def seq_offset(name: str) -> int:
     return seqdata.LABELS[name]
 

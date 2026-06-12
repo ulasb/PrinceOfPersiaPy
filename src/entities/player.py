@@ -225,20 +225,25 @@ class Kid(Char):
         return False
 
     def _careful_step(self, level) -> None:
-        # step up to the edge of the current floor or barrier
+        # step up to the edge of the current floor or barrier; at the
+        # edge itself, tap a foot over it (testfoot) without moving
         x = int(self.x)
-        col = self.col
-        nxt = col + self.face
-        dist = 11
-        if level.is_barrier(self.room, nxt, self.row) \
-                or not level.is_floor(self.room, nxt, self.row):
-            edge = nxt * C.TILE_W
-            if self.face > 0:
-                dist = max(0, edge - 1 - x)
-            else:
-                dist = max(0, x - (edge + C.TILE_W))
-        dist = max(1, min(dist, 13))
-        if dist >= 11:
+        dist = 14
+        for ahead in range(0, 3):
+            col = self.col + ahead * self.face
+            blocked = level.is_barrier(self.room, col, self.row)
+            no_floor = not level.is_floor(self.room, col, self.row)
+            if blocked or no_floor:
+                if self.face > 0:
+                    edge = col * C.TILE_W
+                    dist = edge - 1 - x
+                else:
+                    edge = (col + 1) * C.TILE_W
+                    dist = x - edge
+                break
+        if dist < 1:
+            self.start_seq("testfoot")
+        elif dist >= 14:
             self.start_seq("fullstep")
         else:
             self.start_seq(f"step{dist}")
@@ -267,6 +272,9 @@ class Kid(Char):
     def _control_midair(self, inp: Input, level) -> None:
         if not inp.shift:
             return
+        from entities.char import HANG_SEQS
+        if self.in_seq(*HANG_SEQS):
+            return  # a grab is already in progress
         # grab a ledge while falling past it
         row = C.row_from_y(self.y)
         for col in (self.col + self.face, self.col - self.face):

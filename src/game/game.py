@@ -258,17 +258,12 @@ class Game:
                 if g.npc and g.room == kid.room and abs(g.x - kid.x) < 24:
                     self.state = STATE_VICTORY
 
-    # hanging/climbing sequences position the body against wall faces and
-    # over voids on purpose; grounded barrier/floor checks don't apply
-    HANG_SEQS = ("jumphangMed", "jumphangLong", "hang", "hang1",
-                 "hangstraight", "climbup", "climbdown", "climbfail",
-                 "fallhang", "jumpbackhang", "hangdrop")
-
     # --------------------------------------------------------- post-move
     def _post_move(self, char: Char, prev_y: int) -> None:
         """Floor checks, landings and barrier collisions after movement."""
+        from entities.char import HANG_SEQS
         level = self.level
-        if char.char_id == C.CHAR_KID and char.in_seq(*self.HANG_SEQS):
+        if char.char_id == C.CHAR_KID and char.in_seq(*HANG_SEQS):
             return
         # barrier collision: can't walk into walls/closed gates
         if char.action in (C.ACT_STAND, C.ACT_MOVE, C.ACT_BUMPED):
@@ -293,6 +288,9 @@ class Game:
             if char.in_seq("runjump") and 36 <= char.frame <= 43:
                 return
             if char.in_seq("standjump") and 18 <= char.frame <= 25:
+                return
+            # testfoot leans over the edge and comes back; net zero move
+            if char.in_seq("testfoot"):
                 return
             # fall when both the body column and the trailing foot have no
             # floor; standing with the body over a gap is allowed only for
