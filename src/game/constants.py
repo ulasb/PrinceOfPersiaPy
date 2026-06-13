@@ -74,6 +74,15 @@ LOOSE_DETACH: Final[int] = 10    # ticks until floor falls
 FF_ACCEL: Final[int] = 3
 FF_TERMVEL: Final[int] = 29
 
+# --- combat (AUTO.S strike/block windows, 140-res pixels) ---
+STRIKE_NEAR: Final[int] = 12     # strikerange1: closer and the blade
+STRIKE_FAR: Final[int] = 29      # strikerange2  passes behind the body
+BLOCK_FAR: Final[int] = 29       # blockrange2
+# offguardthres is 8 in the original; _char_separation keeps the kid
+# 10px from a guard, so the lunge window starts just past that
+OFFGUARD_RANGE: Final[int] = 11
+BLOCK_TIME: Final[int] = 4       # guard block impaired after being parried
+
 # --- characters ---
 INITIAL_HP: Final[int] = 3
 CHAR_KID: Final[int] = 0

@@ -182,19 +182,57 @@ def make_duel():
     kid.hp = kid.max_hp = 10
     teleport(kid, 3, 1, 75, 1)
     opp = game.guards[0]
-    opp.x, opp.row, opp.room = 89.0, 1, 3  # within sword reach
+    # the engarde draw steps the kid ~9px forward; this leaves him in
+    # the original strike window (12 <= dist < 29)
+    opp.x, opp.row, opp.room = 100.0, 1, 3
+    opp.control = lambda *a, **k: None  # passive target, but en garde
+    opp.engaged = True
+    run(game, 6)                        # kid auto-draws and readies
     return game, kid, opp
 
 
 def test_kid_strike_hits_guard():
     game, kid, opp = make_duel()
-    opp.control = lambda *a, **k: None  # passive target
-    run(game, 6)
     assert kid.sword_drawn
     hp0 = opp.hp
     run(game, 1, {"s"})
     run(game, 10)
     assert opp.hp == hp0 - 1
+
+
+def parry_guard_strike(game, kid, opp):
+    opp.start_seq("strike")             # guard begins the slow strike
+    run(game, 1)                        # windup frame 168 shows
+    assert opp.frame == 168
+    run(game, 3, {"u"})                 # hold up: parry meets the blade
+
+
+def test_parry_deflects_guard_strike():
+    game, kid, opp = make_duel()
+    hp0 = kid.hp
+    parry_guard_strike(game, kid, opp)
+    assert kid.hp == hp0                # deflected, no damage
+    assert opp.frame in (167, 155, 156)  # thrown into blockedstrike
+    run(game, 8)
+    assert kid.hp == hp0
+
+
+def test_riposte_after_parry_hits_guard():
+    game, kid, opp = make_duel()
+    kid_hp, opp_hp = kid.hp, opp.hp
+    parry_guard_strike(game, kid, opp)
+    run(game, 6, {"s"})                 # counter from the block stance
+    assert kid.hp == kid_hp             # never touched
+    assert opp.hp == opp_hp - 1         # riposte landed
+
+
+def test_strike_out_of_range_misses():
+    game, kid, opp = make_duel()
+    opp.x = kid.x + 55                  # far beyond strikerange2 (29)
+    hp0 = opp.hp
+    run(game, 1, {"s"})
+    run(game, 8)
+    assert opp.hp == hp0
 
 
 def test_guard_kills_unarmed_kid():

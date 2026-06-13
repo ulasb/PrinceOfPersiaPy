@@ -108,3 +108,9 @@ TORCHFLAME = [0x52, 0x53, 0x54, 0x55, 0x56, 0x61, 0x62, 0x63, 0x64,
 
 # potion flask bubble
 SPECIALFLASK = 0x95
+
+# loose sword on the floor: its piece-table A-section is empty; the
+# original draws these instead (FRAMEADV.S drawsworda), flashing the
+# gleam image for a single tick on a random timer
+SWORDGLEAM0 = 0x99
+SWORDGLEAM1 = 0xb3

@@ -111,38 +111,49 @@ class Game:
                 best = g
         return best
 
-    # arm + sword reach at full extension; beyond this the tip visibly
-    # falls short of the opponent's body
-    STRIKE_RANGE = 17
-
     def _resolve_strikes(self) -> None:
-        """Check strike connections at full sword extension frames."""
+        """Sword contact, following the original TestStrike: frame 153
+        (one before full extension) tests the opponent's parry, frame
+        154 (full extension) connects the hit."""
         opp = self.opponent()
-        if opp is None:
-            return
         kid = self.kid
-        dist = abs(kid.x - opp.x)
-        if dist > self.STRIKE_RANGE or kid.row != opp.row:
+        if opp is None or not opp.alive or not kid.alive \
+                or kid.row != opp.row:
             return
-        # kid strikes (full extension frame 154 / 167)
-        if kid.frame in (154, 167) and opp.alive:
-            if opp.in_seq("readyblock", "blockedstrike", "strikeblock"):
+        dist = abs(kid.x - opp.x)
+        hits = []
+        for striker, defender in ((opp, kid), (kid, opp)):
+            if striker.frame not in (153, 154):
+                continue
+            # a parry timed into the block pose deflects the strike;
+            # the defender ends in the riposte stance (frame 161)
+            if defender.frame in (150, 161) and dist < C.BLOCK_FAR:
+                defender.frame = 161
+                striker.start_seq("blockedstrike")
+                striker.animate()
+                if striker is opp:
+                    opp.justblocked = C.BLOCK_TIME
                 self.sounds.play("sword_clash")
-                kid.start_seq("blockedstrike")
-            else:
-                self._hit(opp)
-        # guard strikes
-        if opp.frame in (154, 167) and kid.alive:
-            if kid.in_seq("readyblock", "blockedstrike", "strikeblock"):
-                self.sounds.play("sword_clash")
-                opp.start_seq("blockedstrike")
-            else:
-                self._hit(kid)
+                continue
+            if striker.frame != 154:
+                continue
+            en_garde = defender.sword_drawn if defender is kid \
+                else defender.engaged
+            if en_garde:
+                if C.STRIKE_NEAR <= dist < C.STRIKE_FAR:
+                    hits.append((defender, 1))
+            elif dist <= C.OFFGUARD_RANGE:
+                hits.append((defender, 100))   # defenseless: run through
+        if len(hits) == 2:
+            # both lunges land the same tick: the player wins the tie
+            hits = [h for h in hits if h[0] is opp]
+        for defender, damage in hits:
+            self._hit(defender, damage)
 
-    def _hit(self, char: Char) -> None:
+    def _hit(self, char: Char, damage: int = 1) -> None:
         if getattr(char, "hurt_cooldown", 0) > 0:
             return
-        char.hp -= 1
+        char.hp -= damage
         char.hurt_cooldown = 8
         if char.hp <= 0:
             char.alive = False

@@ -21,6 +21,7 @@ class GuardChar(Char):
     skill: int = 0
     engaged: bool = False
     cooldown: int = 0
+    justblocked: int = 0     # blocktime ticks: can't parry again yet
     npc: bool = False        # princess & friends: no AI, just animate
 
     def __post_init__(self):
@@ -57,13 +58,12 @@ class GuardChar(Char):
             return
         if self.cooldown > 0:
             self.cooldown -= 1
+        if self.justblocked > 0:
+            self.justblocked -= 1
         same_arena = (kid.alive and kid.room == self.room
                       and kid.row == self.row)
         if not same_arena:
-            if self.in_seq("advance", "fastadvance"):
-                return
             return
-        gap = (kid.x - self.x) * self.face
         want_face = 1 if kid.x > self.x else -1
 
         if not self.engaged:
@@ -71,29 +71,48 @@ class GuardChar(Char):
             self.face = want_face
             self.start_seq("guardengarde")
             return
+        dist = abs(kid.x - self.x)
+        if self.frame == 161:
+            # parried the kid's blade: counter or fall back
+            if random.random() < 0.3 + 0.07 * self.skill:
+                self.start_seq("blocktostrike")
+            else:
+                self.start_seq("retreat")
+            return
+        # parry reactively while the kid's strike is committed
+        # (FightCtrl: the enemy blocks when it sees the kid at guy4)
+        if kid.sword_drawn and kid.frame == 152 \
+                and dist < C.BLOCK_FAR and self.justblocked == 0 \
+                and self.frame in (158, 165, 168, 170, 171) \
+                and random.random() < 0.25 + 0.08 * self.skill:
+            self.start_seq("readyblock")
+            return
         if not self.in_seq("ready", "guardengarde", "alertstand"):
             return  # mid-move
         if want_face != self.face:
             self.face = want_face
             return
-        dist = abs(kid.x - self.x)
-        if dist > 16:
+        if not kid.sword_drawn:
+            # run the defenseless kid through
+            if dist > C.OFFGUARD_RANGE:
+                if self._floor_ahead(level):
+                    self.start_seq("advance")
+            elif self.cooldown == 0:
+                self.start_seq("strike")
+                self.cooldown = 6
+            return
+        if dist >= C.STRIKE_FAR - 4:
             if self._floor_ahead(level):
                 self.start_seq("advance")
             return
-        if dist < 9:
+        if dist < C.STRIKE_NEAR:
             if self._floor_behind(level):
                 self.start_seq("retreat")
             return
         if self.cooldown == 0:
-            roll = random.random()
-            strike_chance = 0.25 + 0.06 * self.skill
-            if roll < strike_chance:
+            if random.random() < 0.25 + 0.06 * self.skill:
                 self.start_seq("strike")
                 self.cooldown = 4 + max(0, 6 - self.skill)
-            elif roll < strike_chance + 0.25:
-                self.start_seq("readyblock")
-                self.cooldown = 2
 
     def _floor_ahead(self, level) -> bool:
         col = self.col + self.face

@@ -151,6 +151,11 @@ class Renderer:
             self.piece(BG.PIECEA[L.FLOOR], col, ay)
             bob = (pygame.time.get_ticks() // 220 + col) % 2
             self.piece(BG.SPECIALFLASK, col, ay - 14 + bob, byte_dx=2)
+        elif t == L.SWORD:
+            # floor with the sword lying on it; brief gleam now and then
+            gleam = (pygame.time.get_ticks() // 90 + col * 37) % 55 == 0
+            self.piece(BG.SWORDGLEAM1 if gleam else BG.SWORDGLEAM0,
+                       col, ay)
         else:
             self.piece(BG.PIECEA[t], col, ay + BG.PIECEAY[t])
 

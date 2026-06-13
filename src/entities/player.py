@@ -81,8 +81,9 @@ class Kid(Char):
     def is_engarde(self) -> bool:
         return self.sword_drawn and self.in_seq(
             "ready", "engarde", "advance", "retreat", "strike",
-            "strikeblock", "readyblock", "blocktostrike", "strikeadv",
-            "blockedstrike", "strikeret", "fastadvance", "turnengarde")
+            "strikeblock", "readyblock", "blocking", "blocktostrike",
+            "strikeadv", "blockedstrike", "strikeret", "fastadvance",
+            "turnengarde")
 
     # ----------------------------------------------------------- control
     def control(self, inp: Input, level: L.LevelState, opponent) -> None:
@@ -346,33 +347,66 @@ class Kid(Char):
             self.start_seq("hangstraight")
 
     # --- combat ---
+    # the original dispatches fighting moves by display frame (FightCtrl):
+    # 158/170/171 ready stance, 150 block pose, 161 successful block,
+    # 165 advance, 167 blocked strike, 168 strike windup
+    READY_FRAMES = (158, 170, 171)
+
     def _control_combat(self, inp: Input, level, opponent) -> None:
         if opponent is None or not opponent.alive:
-            if self.in_seq("ready"):
+            if self.frame in self.READY_FRAMES:
                 self.sword_drawn = False
                 self.start_seq("resheathe")
             return
-        # always face the opponent
-        want_face = 1 if opponent.x > self.x else -1
-        if not self.in_seq("ready"):
-            return  # mid-move
-        if want_face != self.face:
-            self.face = want_face
-        if inp.down_pressed:
+        f = self.frame
+        if f in self.READY_FRAMES:
+            want_face = 1 if opponent.x > self.x else -1
+            if want_face != self.face:
+                self.face = want_face
+        if f == 161:
+            # deflected the opponent's blade: riposte or fall back
+            if inp.shift:
+                self.start_seq("blocktostrike")
+            else:
+                self.start_seq("retreat")
+            return
+        if inp.shift_pressed:
+            self._combat_strike()
+            return
+        if inp.down_pressed and f in self.READY_FRAMES:
             self.sword_drawn = False
             self.start_seq("fastsheathe")
             return
-        if inp.shift_pressed:
-            self.start_seq("strike")
-            return
         if inp.up:
-            self.start_seq("readyblock")
+            self._combat_block(opponent)
             return
         d = self.dir_input(inp)
-        if d == self.face:
-            if abs(opponent.x - self.x) > 15:
-                self.start_seq("advance")
+        if f in self.READY_FRAMES:
+            if d == self.face:
+                if abs(opponent.x - self.x) > 15:
+                    self.start_seq("advance")
+            elif d == -self.face:
+                self.start_seq("retreat")
+
+    def _combat_strike(self) -> None:
+        # DoStrike: the kid strikes fast (no windup frame); a counter
+        # out of the block pose is faster still
+        if self.frame in (157, 158, 165, 170, 171):
+            self.start_seq("faststrike")
+        elif self.frame in (150, 161):
+            self.start_seq("blocktostrike")
+
+    def _combat_block(self, opp) -> None:
+        """DoBlock: the parry only deflects if the block pose (150)
+        lands on the opponent's strike frames; mistimed it just waves
+        the sword."""
+        if self.frame == 167:
+            self.start_seq("strikeblock")
             return
-        if d == -self.face:
-            self.start_seq("retreat")
+        if self.frame not in (158, 165, 168, 170, 171):
             return
+        if opp.frame == 168:
+            return                  # windup: one frame early, wait
+        self.start_seq("readyblock")
+        if opp.frame == 153:        # one frame late: skip the raise
+            self.animate()
