@@ -94,8 +94,8 @@ def test_runjump_clears_two_tile_gap():
     # level 2 room 21 row 1: floor at col 1, gap at cols 2-3
     teleport(kid, 21, 1, 17, 1)
     run(game, 4)
-    run(game, 2, {"r"})
-    run(game, 16, {"r", "u"})
+    run(game, 4, {"r"})         # past the run-start frames (1-3), where
+    run(game, 16, {"r", "u"})   # up would mean a standing jump instead
     assert kid.alive
     assert kid.col >= 4  # landed beyond the gap
     assert kid.row == 1
@@ -278,6 +278,88 @@ def test_shift_edge_grab_is_stable():
     # caught the ledge: swing hang or settled still hang
     assert kid.action in (C.ACT_HANG, C.ACT_HANG_STRAIGHT)
     assert max(xs[-12:]) - min(xs[-12:]) == 0  # no teleporting
+
+
+# ------------------------------------------------- level-1 gate passage
+# From a player recording: the kid opens the gate at room 7 col 9 (via
+# the plate in room 8), jump-hangs at room 8's left wall and climbs up
+# through the open gate.  He must end standing in the doorway, not be
+# ejected across the room seam into the void of room 8 col 0.
+
+def open_gate_and_climb(game):
+    kid = game.kid
+    game.level.set_tile(7, 9, 0, 4, C.GATE_MAX)   # gate fully open
+    teleport(kid, 8, 1, 5, -1)
+    run(game, 2)
+    run(game, 40, {"u"})                   # jumphang, then climb up
+    return kid
+
+
+def test_climb_through_open_gate_survives():
+    game = make_game(1)
+    settle(game)
+    kid = open_gate_and_climb(game)
+    run(game, 20)                          # finish the held-up jumpup
+    assert kid.alive
+    assert (kid.room, kid.row) == (7, 0)   # standing above, in room 7
+    assert kid.action == C.ACT_STAND
+    # and he can walk out of the doorway (col 8 is solid; cols 5-6
+    # beyond are loose floors, so stop short of them)
+    run(game, 8, {"l"})
+    run(game, 12)
+    assert kid.alive and kid.room == 7 and kid.row == 0
+    assert kid.col < 9
+
+
+def test_closing_gate_knocks_aside_not_into_void():
+    game = make_game(1)
+    settle(game)
+    kid = game.kid
+    teleport(kid, 7, 0, 132, -1)           # standing in the gate doorway
+    game.level.gates[(7, 9, 0)] = [40, 3]  # gate almost shut
+    run(game, 8)
+    assert kid.alive
+    assert kid.room == 7 and kid.row == 0  # nudged out, never ejected
+    assert kid.col <= 8                    # across the seam into the void
+
+
+def test_gate_closes_at_original_creak_speed():
+    lv = LevelState.load(1)
+    lv.press_plate(8, 7, 1)
+    for _ in range(C.GATE_MAX // C.GATE_RISE + 2):
+        lv.tick()
+    assert lv.gate_pos(7, 9, 0) == C.GATE_MAX
+    # fully open it holds for 50 ticks, then creaks shut at 1/tick:
+    # still passable 60 ticks later (the recording's route needs ~80)
+    for _ in range(110):
+        lv.tick()
+    assert lv.gate_pos(7, 9, 0) >= C.GATE_PASSABLE
+
+
+# ------------------------------------------------------ run control feel
+def test_release_mid_stride_stops_on_plant_frame():
+    game = make_game(1)
+    settle(game)
+    kid = game.kid
+    kid.face = 1
+    run(game, 2, {"r"})                    # run-start frames 1-2
+    assert 1 <= kid.frame <= 3
+    run(game, 1)                           # let go immediately:
+    assert 1 <= kid.frame <= 14            # still running, no skid yet
+    run(game, 16)
+    assert kid.frame == 15                 # stopped on a plant frame
+
+
+def test_up_during_run_start_is_standing_jump():
+    game = make_game(1)
+    settle(game)
+    kid = game.kid
+    kid.face = 1
+    run(game, 2, {"r"})
+    assert 1 <= kid.frame <= 3
+    run(game, 2, {"r", "u"})
+    assert kid.in_seq("standjump")
+    assert not kid.in_seq("runjump")
 
 
 def test_hang_holds_while_shift_held_drops_on_release():

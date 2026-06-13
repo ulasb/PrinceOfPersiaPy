@@ -272,8 +272,11 @@ class Game:
         # barrier collision: can't walk into walls/closed gates
         if char.action in (C.ACT_STAND, C.ACT_MOVE, C.ACT_BUMPED):
             self._check_barrier(char)
+        elif char.action == C.ACT_TURN:
+            self._gate_knock(char)
         # landing during fall
         if char.action in (C.ACT_MIDAIR, C.ACT_FREEFALL):
+            self._unwall(char)
             falling_frames = 102 <= char.frame <= 106
             if char.action == C.ACT_FREEFALL or falling_frames:
                 self._check_landing(char, prev_y)
@@ -319,8 +322,20 @@ class Game:
         col = char.col
         t = level.tile(char.room, col, char.row)
         if level.is_barrier(char.room, col, char.row):
+            if t == L.GATE:
+                # a gate's physical plane is only the rightmost 2px of
+                # its tile (COLL.S BarL=12); the doorway under it is
+                # open, so the kid can stand inside the gate tile
+                if int(char.x) - col * C.TILE_W < 12:
+                    self._gate_knock(char)
+                    return
+                # ran into the plane itself
+                if char.face > 0:
+                    char.x = col * C.TILE_W + 11
+                else:
+                    char.x = (col + 1) * C.TILE_W + 1
             # push back out of the barrier toward where we came from
-            if char.face > 0:
+            elif char.face > 0:
                 char.x = col * C.TILE_W - 1
             else:
                 char.x = (col + 1) * C.TILE_W + 1
@@ -328,6 +343,41 @@ class Game:
                 char.start_seq("hardbump" if char.char_id == 0 else "bump")
             elif char.frame != 15:
                 char.start_seq("bump")
+
+    def _gate_knock(self, char: Char) -> None:
+        """A character standing under a closing gate gets knocked aside
+        5px per tick instead of being ejected a full tile (CHECKGATE)."""
+        level = self.level
+        col = char.col
+        if level.tile(char.room, col, char.row) != L.GATE \
+                or not level.is_barrier(char.room, col, char.row):
+            return
+        if char.frame != 15 and not (108 <= char.frame <= 110) \
+                and char.action != C.ACT_TURN:
+            return
+        foot_col = int(char.x - char.face
+                       * (char.frame_info().foot_dx // 2)) // C.TILE_W
+        char.x += -C.GATE_KNOCK if foot_col <= col else C.GATE_KNOCK
+        self.sounds.play("land")
+
+    def _unwall(self, char: Char) -> None:
+        """A falling character can't pass through a solid wall column:
+        push out to the clear side (the original ran CHECKBARR during
+        falls, so seam-falls never ended up inside wall masses)."""
+        level = self.level
+        if char.room == 0:
+            return
+        row = C.row_from_y(int(char.y))
+        col = char.col
+        if level.tile(char.room, col, row) != L.BLOCK:
+            return
+        off = int(char.x) - col * C.TILE_W
+        left = level.tile(char.room, col - 1, row) != L.BLOCK
+        right = level.tile(char.room, col + 1, row) != L.BLOCK
+        if left and (not right or off <= C.TILE_W // 2):
+            char.x = col * C.TILE_W - 1
+        elif right:
+            char.x = (col + 1) * C.TILE_W + 1
 
     def _check_landing(self, char: Char, prev_y: int) -> None:
         level = self.level

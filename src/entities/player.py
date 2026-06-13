@@ -265,6 +265,12 @@ class Kid(Char):
     # --- running ---
     def _control_run(self, inp: Input, level) -> None:
         d = self.dir_input(inp)
+        if 1 <= self.frame <= 3:
+            # run start (CTRL.S "starting"): committed to the first
+            # steps; only up+forward interrupts, as a standing jump
+            if inp.up and d == self.face:
+                self.start_seq("standjump")
+            return
         if inp.up:
             self.start_seq("runjump")
             return
@@ -274,7 +280,9 @@ class Kid(Char):
         if d == -self.face:
             self.start_seq("runturn")
             return
-        if d == 0:
+        if d == 0 and self.frame in (7, 11):
+            # letting go mid-stride keeps running until a foot plants
+            # (the original stops only on run frames 7 and 11)
             self.start_seq("runstop")
 
     # --- crouching ---
